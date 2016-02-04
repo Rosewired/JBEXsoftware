@@ -1,1 +1,3 @@
 Integrate Javascript and Django: http://lethain.com/intro-to-unintrusive-javascript-with-django/
+
+Python Django tutorial(videos): https://www.youtube.com/channel/UCFW_fvwCoF44MGWk74U_rFg
