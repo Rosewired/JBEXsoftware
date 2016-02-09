@@ -1,6 +1,6 @@
-These commands only work when you are in the right folder:
+These commands only work when you are in the right folder - on Windows recommend using PowerShell that comes with GitHub Desktop:
 
-git clone <URL to repository> = pull in repository/download the project
+git clone <URL to repository> = pull in a repository(download a project)
 
 git status = show the difference between the local repository and the one on Git server
 	untracked files = new file/new change
