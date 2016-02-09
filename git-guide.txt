@@ -1,0 +1,18 @@
+These commands only work when you are in the right folder:
+
+git clone <URL to repository> = pull in repository/download the project
+
+git status = show the difference between the local repository and the one on Git server
+	untracked files = new file/new change
+
+git add <file name> = track the new file/change
+	use -A or ./ to add all files in current folder
+
+git commit -m <"message"> = update the local repository with a message
+
+git push = update the repository on Git server with the local repository
+
+
+If you are already have a clone(copy):
+
+git pull = update the current repository
