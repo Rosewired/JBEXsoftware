@@ -7,7 +7,7 @@ function preload() {
     game.load.image('e','asset/ship.png');
     game.load.image('b','asset/bullet.png');
     
-//    game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+    game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
 }
 var eSprite;
 var bullet;
@@ -18,20 +18,13 @@ var key1;
 var i;
 
 function create() {
+    game.add.sprite(game.world.randomX, game.world.randomY, 'e');
      game.input.enabled = true;
     bullets = game.add.group();
     bullets.enableBody = true;
     eSprite = game.add.sprite(100,100,'e');
     
-    for(i = 0; i <1; i ++)
-        {
-            var newBullet = bullets.create(i*10,0,'b');
-            newBullet.body.gravity.y = 300;
-
-        //  This just gives each star a slightly random bounce value
-        newBullet.body.bounce.y = 0.7 + Math.random() * 0.2;
-
-        }
+    
     
     game.physics.arcade.enable(eSprite);
     cursors = game.input.keyboard.createCursorKeys();
@@ -41,14 +34,11 @@ function create() {
     eSprite.body.collideWorldBounds = true;
     eSprite.anchor.setTo(0.5, 0.5);
     
-    key = game.input.keyboard.addkey(Phaser.Keyboard.SPACEBAR);
-    key.onDown.add(addPhaserDude,this);
+//    key = game.input.keyboard.addkey(Phaser.Keyboard.SPACEBAR);
+//    key.onDown.add(addPhaserDude,this);
     
     key1 = game.input.keyboard.addKey(Phaser.Keyboard.ONE);
-    key1.onDown.add(addPhaserDude, this);
-    
-    game.input.keyboard.removeKeyCapture(Phaser.Keyboard.ONE);
-    
+    key1.onDown.add(addPhaserDude, this);   
 
 
 }
@@ -146,38 +136,14 @@ function update() {
             }
 
 }
-//
-//Weapon.SingleBullet.prototype.fire = function(source)
-//{
-//    var x = source.x;
-//    va y = source.y;
-//    this.getFireExists(false).fire(x,y,0.this.bulletSpeed,0,0);
-//    
-//}
-
-//var shipBullet= function(game, key)
-//{
-//    
-//    Pahser.Sprite.call(this, game, 0,0, key);
-//    this.anchor.set(.5);
-//    this.checkWorldBounds = true;
-//    this.outOfBoundsKill = true;
-//    this.exists = false;
-//    
-//}
-//
-//    shipBullet.prototype.fire = function()
-//    {
-//        this.visible = true;
-//    };
-    
 
 function addPhaserDude () {
+//    alert("HELLO");
     game.add.sprite(game.world.randomX, game.world.randomY, 'b');
 }
 
-    function fire(x,y)
-    {
-        game.add.sprite(x,y,'b');
-    }
+//    function fire(x,y)
+//    {
+//        game.add.sprite(x,y,'b');
+//    }
 
