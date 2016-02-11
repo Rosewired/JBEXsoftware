@@ -7,13 +7,13 @@ function preload() {
     game.load.image('e','asset/ship.png');
     game.load.image('b','asset/bullet.png');
     
-    game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+//    game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
 }
 var eSprite;
 var bullet;
 var bullets;
 var cursors;
-var key;
+var key2;
 var key1;
 var i;
 
@@ -34,11 +34,22 @@ function create() {
     eSprite.body.collideWorldBounds = true;
     eSprite.anchor.setTo(0.5, 0.5);
     
-//    key = game.input.keyboard.addkey(Phaser.Keyboard.SPACEBAR);
-//    key.onDown.add(addPhaserDude,this);
     
+    //For some reason, these two lines of code will keep the two marked lines from working if they are here. However, if you put them below, it is fine with it.
+      key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
+    key2.onDown.add(fire,this);
+    
+    
+    //Here
     key1 = game.input.keyboard.addKey(Phaser.Keyboard.ONE);
     key1.onDown.add(addPhaserDude, this);   
+    
+//    key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
+//    key2.onDown.add(fire,this);   
+    
+    
+    
+    
 
 
 }
@@ -138,12 +149,12 @@ function update() {
 }
 
 function addPhaserDude () {
-//    alert("HELLO");
+//    
     game.add.sprite(game.world.randomX, game.world.randomY, 'b');
 }
 
-//    function fire(x,y)
-//    {
-//        game.add.sprite(x,y,'b');
-//    }
+    function fire()
+    {
+      alert("HELLO");  
+    }
 
