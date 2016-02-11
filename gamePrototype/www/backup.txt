@@ -1,0 +1,9 @@
+for(i = 0; i <1; i ++)
+        {
+            var newBullet = bullets.create(i*10,0,'b');
+            newBullet.body.gravity.y = 300;
+
+        //  This just gives each star a slightly random bounce value
+        newBullet.body.bounce.y = 0.7 + Math.random() * 0.2;
+
+        }
