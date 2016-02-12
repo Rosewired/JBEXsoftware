@@ -15,10 +15,13 @@ var bullets;
 var cursors;
 var key2;
 var key1;
+var s;
 var i;
 
 function create() {
-    game.add.sprite(game.world.randomX, game.world.randomY, 'e');
+    s = game.add.sprite(game.world.randomX, game.world.randomY, 'e');
+    game.physics.arcade.enable(s);
+    s.body.velocity.y = 10;
      game.input.enabled = true;
     bullets = game.add.group();
     bullets.enableBody = true;
@@ -145,16 +148,25 @@ function update() {
             {
                 eSprite.angle = 90;
             }
+    
+    
 
 }
 
 function addPhaserDude () {
 //    
-    game.add.sprite(game.world.randomX, game.world.randomY, 'b');
+    game.add.sprite(eSprite.x, eSprite.y, 'b');
 }
 
     function fire()
     {
-      alert("HELLO");  
+        
+      var newBullet = game.add.sprite(eSprite.x, eSprite.y, 'b');
+        game.physics.arcade.enable(newBullet);
+        newBullet.angle = eSprite.angle+135;
+//        newBullet.body.velocity.y = -50;
+        newBullet.angle = eSprite.angle;
+        game.physics.arcade.velocityFromAngle(eSprite.angle+135, 1000, newBullet.body.velocity);
+        
     }
 
