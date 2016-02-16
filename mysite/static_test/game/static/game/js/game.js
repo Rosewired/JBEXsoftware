@@ -1,34 +1,60 @@
-var game = new Phaser.Game(1000, 800, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+
+
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'TEST', { preload: preload, create: create, update: update });
 
 function preload() {
     game.load.image('e',STATIC_URL+'images/ship.png');
+    game.load.image('b',STATIC_URL+'images/bullet.png');
     
-    game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+//    game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
 }
 var eSprite;
 var bullet;
+var bullets;
 var cursors;
-var key;
+var key2;
+var key1;
+var s;
+var i;
+
 function create() {
-    
-    
+    s = game.add.sprite(game.world.randomX, game.world.randomY, 'e');
+    game.physics.arcade.enable(s);
+    s.body.velocity.y = 10;
+     game.input.enabled = true;
+    bullets = game.add.group();
+    bullets.enableBody = true;
     eSprite = game.add.sprite(100,100,'e');
-    bullet = game.add.sprite(100,100,'b');
-    bullet.visible = false;
     
-//    eSprite.scale.setTo(.17,.17);
+    
+    
     game.physics.arcade.enable(eSprite);
     cursors = game.input.keyboard.createCursorKeys();
 
-//    eSprite.body.bounce.y = 0.2;
     eSprite.body.gravity.y = 0;
     eSprite.body.gravity.x = 0;
     eSprite.body.collideWorldBounds = true;
     eSprite.anchor.setTo(0.5, 0.5);
     
-//    key = game.input.keyboard.addkey(Phaser.Keyboard.spacebar);
-//    key.onDown.fire();
-//    add(this.shipBullet.fire,this.bullet);
+    
+    //For some reason, these two lines of code will keep the two marked lines from working if they are here. However, if you put them below, it is fine with it.
+      key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
+    key2.onDown.add(fire,this);
+    
+    
+    //Here
+    key1 = game.input.keyboard.addKey(Phaser.Keyboard.ONE);
+    key1.onDown.add(addPhaserDude, this);   
+    
+//    key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
+//    key2.onDown.add(fire,this);   
+    
+    
+    
+    
+
+
 }
 
 var xGlidePos = 0;
@@ -122,21 +148,25 @@ function update() {
             {
                 eSprite.angle = 90;
             }
-}
     
-function shipBullet(shipAngle, shipLocation)
-    {
-        this.angle = shipAngle;
-        this.shipLocation = shipLocation;
-    }
+    
 
-    shipBullet.prototype.fire = function()
+}
+
+function addPhaserDude () {
+//    
+    game.add.sprite(eSprite.x, eSprite.y, 'b');
+}
+
+    function fire()
     {
-        this.visible = true;
-    };
-    
-//function fire()
-//    {
-//        bullet.visible = true;    
-//    }
+        
+      var newBullet = game.add.sprite(eSprite.x, eSprite.y, 'b');
+        game.physics.arcade.enable(newBullet);
+        newBullet.angle = eSprite.angle+135;
+//        newBullet.body.velocity.y = -50;
+        newBullet.angle = eSprite.angle;
+        game.physics.arcade.velocityFromAngle(eSprite.angle+135, 1000, newBullet.body.velocity);
+        
+    }
 
