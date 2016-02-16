@@ -6,6 +6,7 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'TEST', { preload: preload, cr
 function preload() {
     game.load.image('e','asset/ship.png');
     game.load.image('b','asset/bullet.png');
+    game.load.image('a','asset/asteroid.png');
     
 //    game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
 }
@@ -28,7 +29,6 @@ function create() {
     eSprite = game.add.sprite(100,100,'e');
     
     
-    
     game.physics.arcade.enable(eSprite);
     cursors = game.input.keyboard.createCursorKeys();
 
@@ -37,19 +37,14 @@ function create() {
     eSprite.body.collideWorldBounds = true;
     eSprite.anchor.setTo(0.5, 0.5);
     
-    
-    //For some reason, these two lines of code will keep the two marked lines from working if they are here. However, if you put them below, it is fine with it.
-      key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
+    key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
     key2.onDown.add(fire,this);
     
     
     //Here
     key1 = game.input.keyboard.addKey(Phaser.Keyboard.ONE);
     key1.onDown.add(addPhaserDude, this);   
-    
-//    key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
-//    key2.onDown.add(fire,this);   
-    
+
     
     
     
