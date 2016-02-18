@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+	<link rel="stylesheet" type="text/css" href="themes/google/google.css">
+	
+	<style>
+		margin:auto;
+	</style>
+</head>
+<body background="background.jpg">
+	<script>
+		function aboutFunct() {
+			swal({
+				title: "About",
+				text: "Space Spellers is a fun way to develop spelling skills while saving the galaxy at the same time! Pilot a starship to destroy as many misspelled asteroids as you can in the time limit! Available for grades 1st through 5th.",
+			});
+		}
+		
+		function studentFunct() {
+			swal({
+      			title: "Student Login", 
+      			text: "Please Enter Your Username",
+      			type: "input",
+      			inputType: "text",
+      			showCancelButton: true,
+     			 closeOnConfirm: false
+    		}, function(studentUser) {
+      		console.log(studentUser);
+   			});
+		}
+		
+		function teacherFunct() {
+			swal({
+      			title: "Teacher Login", 
+      			text: "Please Enter Your Username",
+      			type: "input",
+      			inputType: "text",
+      			showCancelButton: true,
+     			 closeOnConfirm: false
+    		}, function(teacherUser) {
+      		console.log(teacherUser);
+   			});
+		}
+	</script>
+	<div style="left:50%">  
+		<img style="position:absolute;top:325px;left:725px" src="fire.gif">  
+		<img style="position:absolute;top:0px;left:300px" src="title.png">
+		<input type="image" src="about.png" style="position:absolute;top:25px;left:75px" onClick="aboutFunct();">
+		<input type="image" src="students.png" style="position:absolute;top:75px;left:900px" onClick="studentFunct();">
+		<input type="image" src="teachers.png" style="position:absolute;top:350px;left:125px" onClick="teacherFunct();">
+	</div>
+</body>
+</html>
