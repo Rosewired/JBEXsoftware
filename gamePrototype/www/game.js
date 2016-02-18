@@ -11,6 +11,7 @@ function preload() {
 //    game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
 }
 var eSprite;
+var asteroid;
 var bullet;
 var bullets;
 var cursors;
@@ -28,15 +29,30 @@ function create() {
     bullets.enableBody = true;
     eSprite = game.add.sprite(100,100,'e');
     
+    //This is the minumum you have to do to add a sprite to the game. 
+    asteroid = game.add.sprite(game.world.randomX, game.world.randomY, 'a');
     
+    //Enable physics on these two sprites
     game.physics.arcade.enable(eSprite);
+    game.physics.arcade.enable(asteroid);
+    
     cursors = game.input.keyboard.createCursorKeys();
 
+    asteroid.body.gravity.y = 0;
+    asteroid.body.gravity.x = 0;
+    asteroid.body.collideWorldBounds = true;
+    asteroid.anchor.setTo(0.5,0.5);
+    
+	 
+
+	
     eSprite.body.gravity.y = 0;
     eSprite.body.gravity.x = 0;
     eSprite.body.collideWorldBounds = true;
     eSprite.anchor.setTo(0.5, 0.5);
     
+	game.time.events.repeat(Phaser.Timer.SECOND * 5, 10, moveAsteroid, this);
+	
     key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
     key2.onDown.add(fire,this);
     
@@ -56,6 +72,8 @@ var xGlidePos = 0;
 var xGlideNeg = 0;
 var yGlidePos = 0;
 var yGlideNeg = 0;
+var asteroidTime = 0;
+
 function update() {
 
     if (cursors.left.isDown)
@@ -143,9 +161,15 @@ function update() {
             {
                 eSprite.angle = 90;
             }
+//	if(Phaser.Timer.SECOND-asteroidTime > 5)
+//		{
+//			console.log("Time "+asteroidTime);
+//			asteroidTime = Phaser.Timer.SECOND;
+//			asteroid.rotation = game.physics.arcade.moveToXY(asteroid, game.world.randomX, game.world.randomY,300,50000);
+//		}
+//	console.log(Phaser.Timer.SECOND);
     
-    
-
+  
 }
 
 function addPhaserDude () {
@@ -164,4 +188,9 @@ function addPhaserDude () {
         game.physics.arcade.velocityFromAngle(eSprite.angle+135, 1000, newBullet.body.velocity);
         
     }
+
+function moveAsteroid()
+{
+	asteroid.rotation = game.physics.arcade.moveToXY(asteroid, game.world.randomX, game.world.randomY,300,5000);
+}
 
