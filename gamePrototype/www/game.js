@@ -41,7 +41,7 @@ function create() {
     asteroid.body.gravity.y = 0;
     asteroid.body.gravity.x = 0;
     asteroid.body.collideWorldBounds = true;
-    asteroid.anchor.setTo(0.5,0.5);
+    asteroid.anchor.setTo(0.5,0);
     
 	 
 
@@ -80,7 +80,7 @@ function update() {
     {
          if(!cursors.up.isDown&&!cursors.down.isDown)
             {
-             eSprite.angle = 45;
+             eSprite.angle = -90;
             }
         
         xGlidePos = 0;
@@ -93,7 +93,8 @@ function update() {
     {
         if(!cursors.up.isDown&&!cursors.down.isDown)
             {
-             eSprite.angle = 225;
+             eSprite.angle = 90;
+				 //225;
             }
         xGlideNeg = 0;
         //  Move to the right
@@ -106,16 +107,15 @@ function update() {
         {
          xGlidePos = 0;
             xGlideNeg = 0;
-                    eSprite.body.velocity.x = 0;
-      
-            
+                    eSprite.body.velocity.x = 0;            
         }
     
     if(cursors.up.isDown)
     {
          if(!cursors.left.isDown&&!cursors.right.isDown)
             {
-             eSprite.angle = 135;
+             eSprite.angle = 0;
+				 //135;
             }
         
         yGlidePos = 0;
@@ -129,7 +129,7 @@ function update() {
             
              if(!cursors.left.isDown&&!cursors.right.isDown)
             {
-             eSprite.angle = -45;
+             eSprite.angle = 180;
             }
             
             yGlideNeg = 0;
@@ -147,19 +147,19 @@ function update() {
     
         if(cursors.up.isDown&&cursors.right.isDown)
             {
-                eSprite.angle = 180;
+                eSprite.angle = 45;
             }
             else if(cursors.right.isDown&&cursors.down.isDown)
             {
-                eSprite.angle = 270;
+                eSprite.angle = 135;
             }
         else if(cursors.down.isDown&&cursors.left.isDown)
             {
-                eSprite.angle = 0;
+                eSprite.angle = -135;
             }
     else if(cursors.left.isDown&&cursors.up.isDown)
             {
-                eSprite.angle = 90;
+                eSprite.angle = -45;
             }
 //	if(Phaser.Timer.SECOND-asteroidTime > 5)
 //		{
@@ -182,10 +182,11 @@ function addPhaserDude () {
         
       var newBullet = game.add.sprite(eSprite.x, eSprite.y, 'b');
         game.physics.arcade.enable(newBullet);
-        newBullet.angle = eSprite.angle+135;
+		newBullet.anchor.setTo(0.5,1);
+        newBullet.angle = eSprite.angle;
 //        newBullet.body.velocity.y = -50;
         newBullet.angle = eSprite.angle;
-        game.physics.arcade.velocityFromAngle(eSprite.angle+135, 1000, newBullet.body.velocity);
+        game.physics.arcade.velocityFromAngle(eSprite.angle-90, 1000, newBullet.body.velocity);
         
     }
 
