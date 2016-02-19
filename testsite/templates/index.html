@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+	<title>Phaser - Making your first game, part 1</title>
+	<script type="text/javascript">
+		var STATIC_URL = "{% static 'game/' %}";
+	</script>
+	<script type="text/javascript" src="{% static 'game/js/lib/phaser.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'game/js/game.js' %}"></script>
+</head>
+<body>
+
+
+
+</body>
+</html>
+{% endblock %}
