@@ -6,10 +6,12 @@
 <html>
 <head>
 	<script src="{% static 'about/dist/sweetalert.min.js' %}"></script>
+	<script src="{% static 'about/dist/swal-forms.js' %}"></script>
 	<script src="{% static 'about/js/jquery-1.12.0.min.js' %}"></script>
 	
 	<link rel="stylesheet" type="text/css" href="{% static 'about/dist/sweetalert.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'about/themes/google/google.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'about/css/swal-forms.css' %}">
 	
 	<style>
 		margin:auto;
@@ -27,26 +29,32 @@
 		}
 		
 		function studentFunct() {
-			swal({
+			swal.withForm({
       			title: "Student Login", 
       			text: "Please Enter Your Username",
-      			type: "input",
-      			inputType: "text",
       			showCancelButton: true,
-     			closeOnConfirm: true
+     			closeOnConfirm: false,
+				formFields: [
+					{ id: 'name', placeholder: 'username' },
+					{ id: 'password', type: 'password' }
+				]
     		}, function(studentUser) {
+				console.log("test")
 				$.ajax({
 						type: "post",
 						url: "/login/",
-						data: {csrfmiddlewaretoken: '{{ csrf_token }}', username: "helloworld", password: "software" },
+						data: {
+							csrfmiddlewaretoken: '{{ csrf_token }}', 
+							username: document.getElementById('name').value, 
+							password: document.getElementById('password').value 
+						},
 						success: function(response) {
 							// data.redirect contains the string URL to redirect to
 							window.location.href = response
-							
 						}
 						
 				})
-   			}); 
+   			});
 		}
 		
 		function teacherFunct() {

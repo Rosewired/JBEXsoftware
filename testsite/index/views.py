@@ -21,7 +21,8 @@ def Login(request):
             else:
                 return HttpResponse("Inactive user.")
         else:
-            return HttpResponseRedirect('/accounts/invalid')
+            #return HttpResponseRedirect('/accounts/invalid')
+            return HttpResponse('/accounts/invalid')
 
     return render(request, "index/login.html", {'redirect_to': next})
     
