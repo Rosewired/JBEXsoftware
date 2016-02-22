@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'index',
 )
 
-LOGIN_URL = '/login/'
+LOGIN_URL = '/about/'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

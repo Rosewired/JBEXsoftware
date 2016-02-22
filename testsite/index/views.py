@@ -59,6 +59,7 @@ def Home(request):
 def Blog(request):
     return render(request, "index/blog.html", {})
 
+@login_required
 def game(request):
     return render(request, 'index.html')
 
