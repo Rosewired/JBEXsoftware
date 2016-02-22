@@ -21,6 +21,14 @@ var s;
 var i;
 
 function create() {
+	 game.physics.startSystem(Phaser.Physics.P2JS);
+	    game.physics.p2.setImpactEvents(true);
+
+	//Collision groups
+	  var bulletColGroup = game.physics.p2.createCollisionGroup();
+    var astColGroup = game.physics.p2.createCollisionGroup();
+	
+	
     s = game.add.sprite(game.world.randomX, game.world.randomY, 'e');
     game.physics.arcade.enable(s);
     s.body.velocity.y = 10;
@@ -36,7 +44,7 @@ function create() {
     game.physics.arcade.enable(eSprite);
     game.physics.arcade.enable(asteroid);
     
-    cursors = game.input.keyboard.createCursorKeys();
+    cursors = game.inp	ut.keyboard.createCursorKeys();
 
     asteroid.body.gravity.y = 0;
     asteroid.body.gravity.x = 0;
@@ -51,9 +59,10 @@ function create() {
     eSprite.body.collideWorldBounds = true;
     eSprite.anchor.setTo(0.5, 0.5);
     
-	game.time.events.repeat(Phaser.Timer.SECOND * 5, 10, moveAsteroid, this);
+//	 game.time.events.loop(Phaser.Timer.SECOND, updateCounter, this);
+	game.time.events.loop(Phaser.Timer.SECOND * 5, moveAsteroid, this);
 	
-    key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
+    key2 = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     key2.onDown.add(fire,this);
     
     
@@ -160,16 +169,9 @@ function update() {
     else if(cursors.left.isDown&&cursors.up.isDown)
             {
                 eSprite.angle = -45;
-            }
-//	if(Phaser.Timer.SECOND-asteroidTime > 5)
-//		{
-//			console.log("Time "+asteroidTime);
-//			asteroidTime = Phaser.Timer.SECOND;
-//			asteroid.rotation = game.physics.arcade.moveToXY(asteroid, game.world.randomX, game.world.randomY,300,50000);
-//		}
-//	console.log(Phaser.Timer.SECOND);
-    
+            } 
   
+	
 }
 
 function addPhaserDude () {
