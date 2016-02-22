@@ -15,14 +15,13 @@ def Login(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                print "username: " + username + " and password: " + password + "\n"
                 return HttpResponse('/game/')
                 #return HttpResponseRedirect('/game')
             else:
                 return HttpResponse("Inactive user.")
         else:
-            #return HttpResponseRedirect('/accounts/invalid')
             return HttpResponse('/accounts/invalid')
+            #return HttpResponseRedirect('/accounts/invalid')
 
     return render(request, "index/login.html", {'redirect_to': next})
     

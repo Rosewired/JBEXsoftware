@@ -19,7 +19,6 @@
 </head>
 
 <body background="{% static 'about/background.jpg' %}">
-	<script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
 	<script>
 		function aboutFunct() {
 			swal({
@@ -33,27 +32,27 @@
       			title: "Student Login", 
       			text: "Please Enter Your Username",
       			showCancelButton: true,
-     			closeOnConfirm: false,
+     			closeOnConfirm: true,
 				formFields: [
 					{ id: 'name', placeholder: 'username' },
 					{ id: 'password', type: 'password' }
 				]
-    		}, function(studentUser) {
-				console.log("test")
-				$.ajax({
-						type: "post",
-						url: "/login/",
-						data: {
-							csrfmiddlewaretoken: '{{ csrf_token }}', 
-							username: document.getElementById('name').value, 
-							password: document.getElementById('password').value 
-						},
-						success: function(response) {
-							// data.redirect contains the string URL to redirect to
-							window.location.href = response
-						}
-						
-				})
+    		}, function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+							type: "post",
+							url: "/login/",
+							data: {
+								csrfmiddlewaretoken: '{{ csrf_token }}', 
+								username: document.getElementById('name').value, 
+								password: document.getElementById('password').value 
+							},
+							success: function(response) {
+								// data.redirect contains the string URL to redirect to
+								window.location.href = response
+							}
+					})
+				}
    			});
 		}
 		
@@ -66,7 +65,7 @@
       			showCancelButton: true,
      			 closeOnConfirm: false
     		}, function(teacherUser) {
-      		console.log(teacherUser);
+				console.log(teacherUser);
    			});
 		}
 	</script>
