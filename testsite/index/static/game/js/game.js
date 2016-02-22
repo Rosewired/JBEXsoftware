@@ -21,10 +21,18 @@ var s;
 var i;
 
 function create() {
+	 game.physics.startSystem(Phaser.Physics.P2JS);
+	    game.physics.p2.setImpactEvents(true);
+
+	//Collision groups
+	  var bulletColGroup = game.physics.p2.createCollisionGroup();
+    var astColGroup = game.physics.p2.createCollisionGroup();
+	
+	
     s = game.add.sprite(game.world.randomX, game.world.randomY, 'e');
     game.physics.arcade.enable(s);
     s.body.velocity.y = 10;
-     game.input.enabled = true;
+    game.input.enabled = true;
     bullets = game.add.group();
     bullets.enableBody = true;
     eSprite = game.add.sprite(100,100,'e');
@@ -41,9 +49,7 @@ function create() {
     asteroid.body.gravity.y = 0;
     asteroid.body.gravity.x = 0;
     asteroid.body.collideWorldBounds = true;
-    asteroid.anchor.setTo(0.5,0.5);
-    
-	 
+    asteroid.anchor.setTo(0.5,0);
 
 	
     eSprite.body.gravity.y = 0;
@@ -51,9 +57,10 @@ function create() {
     eSprite.body.collideWorldBounds = true;
     eSprite.anchor.setTo(0.5, 0.5);
     
-	game.time.events.repeat(Phaser.Timer.SECOND * 5, 10, moveAsteroid, this);
+//	 game.time.events.loop(Phaser.Timer.SECOND, updateCounter, this);
+	game.time.events.loop(Phaser.Timer.SECOND * 5, moveAsteroid, this);
 	
-    key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
+    key2 = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     key2.onDown.add(fire,this);
     
     
@@ -80,7 +87,7 @@ function update() {
     {
          if(!cursors.up.isDown&&!cursors.down.isDown)
             {
-             eSprite.angle = 45;
+             eSprite.angle = -90;
             }
         
         xGlidePos = 0;
@@ -93,7 +100,8 @@ function update() {
     {
         if(!cursors.up.isDown&&!cursors.down.isDown)
             {
-             eSprite.angle = 225;
+             eSprite.angle = 90;
+				 //225;
             }
         xGlideNeg = 0;
         //  Move to the right
@@ -106,16 +114,15 @@ function update() {
         {
          xGlidePos = 0;
             xGlideNeg = 0;
-                    eSprite.body.velocity.x = 0;
-      
-            
+                    eSprite.body.velocity.x = 0;            
         }
     
     if(cursors.up.isDown)
     {
          if(!cursors.left.isDown&&!cursors.right.isDown)
             {
-             eSprite.angle = 135;
+             eSprite.angle = 0;
+				 //135;
             }
         
         yGlidePos = 0;
@@ -129,7 +136,7 @@ function update() {
             
              if(!cursors.left.isDown&&!cursors.right.isDown)
             {
-             eSprite.angle = -45;
+             eSprite.angle = 180;
             }
             
             yGlideNeg = 0;
@@ -147,29 +154,22 @@ function update() {
     
         if(cursors.up.isDown&&cursors.right.isDown)
             {
-                eSprite.angle = 180;
+                eSprite.angle = 45;
             }
             else if(cursors.right.isDown&&cursors.down.isDown)
             {
-                eSprite.angle = 270;
+                eSprite.angle = 135;
             }
         else if(cursors.down.isDown&&cursors.left.isDown)
             {
-                eSprite.angle = 0;
+                eSprite.angle = -135;
             }
     else if(cursors.left.isDown&&cursors.up.isDown)
             {
-                eSprite.angle = 90;
-            }
-//	if(Phaser.Timer.SECOND-asteroidTime > 5)
-//		{
-//			console.log("Time "+asteroidTime);
-//			asteroidTime = Phaser.Timer.SECOND;
-//			asteroid.rotation = game.physics.arcade.moveToXY(asteroid, game.world.randomX, game.world.randomY,300,50000);
-//		}
-//	console.log(Phaser.Timer.SECOND);
-    
+                eSprite.angle = -45;
+            } 
   
+	
 }
 
 function addPhaserDude () {
@@ -182,10 +182,11 @@ function addPhaserDude () {
         
       var newBullet = game.add.sprite(eSprite.x, eSprite.y, 'b');
         game.physics.arcade.enable(newBullet);
-        newBullet.angle = eSprite.angle+135;
+		newBullet.anchor.setTo(0.5,1);
+        newBullet.angle = eSprite.angle;
 //        newBullet.body.velocity.y = -50;
         newBullet.angle = eSprite.angle;
-        game.physics.arcade.velocityFromAngle(eSprite.angle+135, 1000, newBullet.body.velocity);
+        game.physics.arcade.velocityFromAngle(eSprite.angle-90, 1000, newBullet.body.velocity);
         
     }
 
@@ -193,4 +194,3 @@ function moveAsteroid()
 {
 	asteroid.rotation = game.physics.arcade.moveToXY(asteroid, game.world.randomX, game.world.randomY,300,5000);
 }
-
