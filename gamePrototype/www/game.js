@@ -20,6 +20,7 @@ var key2;
 var key1;
 var s;
 var i;
+var rand;
 
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -36,6 +37,8 @@ function create() {
 	asteroids.enableBody = true;
 	asteroids.physicsBodyType = Phaser.Physics.ARCADE;
 	
+	
+	
     eSprite = game.add.sprite(100,100,'e');
     
     //This is the minumum you have to do to add a sprite to the game.
@@ -43,17 +46,23 @@ function create() {
 	   game.physics.arcade.enable(eSprite);
 //    game.physics.arcade.enable(asteroid);
 	
-	for(var k  = 0; k < 10; k++)
-		{
+	for(var k  = 0; k < 5; k++)
+	{
     	var ast = asteroids.create(game.world.randomX, game.world.randomY, 'a');
-			moveAsteroid(ast); 
-		}
+		 
+	}
     
+	asteroids.setAll('anchor.x',.5);
+	asteroids.setAll('anchor.y',.5);
+	asteroids.setAll('body.collideWorldBounds', true);
+	
     //Enable physics on these two sprites
  
     
     cursors = game.input.keyboard.createCursorKeys();
 
+
+	
 //    asteroid.body.gravity.y = 0;
 //    asteroid.body.gravity.x = 0;
 //    asteroid.body.collideWorldBounds = true;
@@ -65,7 +74,7 @@ function create() {
     eSprite.body.collideWorldBounds = true;
     eSprite.anchor.setTo(0.5, 0.5);
     
-//	 game.time.events.loop(Phaser.Timer.SECOND, updateCounter, this);
+	 game.time.events.loop(Phaser.Timer.SECOND*10, moveAsteroid, this);
 	
 	
     key2 = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -78,7 +87,7 @@ function create() {
 
     
     
-    
+    	rand = new RandomDataGenerator();
 
 
 }
@@ -194,6 +203,8 @@ function addPhaserDude () {
 		var newBullet = bullets.create(eSprite.x, eSprite.y, 'b');
 //        game.physics.arcade.enable(newBullet);
 		newBullet.anchor.setTo(0.5,1);
+		newBullet.events.onOutOfBounds.add(resetBullet, this);
+
         newBullet.angle = eSprite.angle;
 //        newBullet.body.velocity.y = -50;
         newBullet.angle = eSprite.angle;
@@ -201,10 +212,26 @@ function addPhaserDude () {
         
     }
 
-function moveAsteroid(asteroid)
+function moveAsteroid()
 {
-	asteroid.rotation = game.physics.arcade.moveToXY(asteroid, game.world.randomX, game.world.randomY,300,5000);
-	game.time.events.loop(Phaser.Timer.SECOND * 5, moveAsteroid(asteroid), this);
+	for(var i = 0; i < asteroids.children.length; i ++)
+		{
+			if(asteroids.children[i].alive)
+				{ 
+					asteroids.children[i].angle += game.rnd.integerInRange(-180, 180);
+					game.physics.arcade.velocityFromRotation(asteroids.children[i].rotation, 50, asteroids.children[i].body.velocity);
+//					console.log(rand.angle());
+//					asteroids.children[i].angle = 
+//							game.physics.arcade.moveToXY(asteroids.childen[i], game.world.randomX, game.world.randomY,300,5000);
+////game.time.events.loop(Phaser.Timer.SECOND * 5, moveAsteroid(asteroid), this);
+				}
+		}
+
+}
+
+function resetBullet (bul)
+{
+	bul.kill();
 }
 
 function collisionHandler(bul, ast)
