@@ -46,7 +46,7 @@ function create() {
 	for(var k  = 0; k < 10; k++)
 		{
     	var ast = asteroids.create(game.world.randomX, game.world.randomY, 'a');
-			moveAsteroid(ast);
+			moveAsteroid(ast); 
 		}
     
     //Enable physics on these two sprites
