@@ -8,10 +8,11 @@ function preload() {
     game.load.image('b','asset/bullet.png');
     game.load.image('a','asset/asteroid.png');
     
-//    game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+   game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
 }
 var eSprite;
 var asteroid;
+var asteroids;
 var bullet;
 var bullets;
 var cursors;
@@ -21,46 +22,51 @@ var s;
 var i;
 
 function create() {
-	 game.physics.startSystem(Phaser.Physics.P2JS);
-	    game.physics.p2.setImpactEvents(true);
+	game.physics.startSystem(Phaser.Physics.ARCADE);
 
-	//Collision groups
-	  var bulletColGroup = game.physics.p2.createCollisionGroup();
-    var astColGroup = game.physics.p2.createCollisionGroup();
-	
-	
     s = game.add.sprite(game.world.randomX, game.world.randomY, 'e');
     game.physics.arcade.enable(s);
     s.body.velocity.y = 10;
      game.input.enabled = true;
     bullets = game.add.group();
     bullets.enableBody = true;
+	bullets.physicsBodyType = Phaser.Physics.ARCADE;
+	
+	asteroids = game.add.group();
+	asteroids.enableBody = true;
+	asteroids.physicsBodyType = Phaser.Physics.ARCADE;
+	
     eSprite = game.add.sprite(100,100,'e');
     
-    //This is the minumum you have to do to add a sprite to the game. 
-    asteroid = game.add.sprite(game.world.randomX, game.world.randomY, 'a');
+    //This is the minumum you have to do to add a sprite to the game.
+
+	   game.physics.arcade.enable(eSprite);
+//    game.physics.arcade.enable(asteroid);
+	
+	for(var k  = 0; k < 10; k++)
+		{
+    	var ast = asteroids.create(game.world.randomX, game.world.randomY, 'a');
+			moveAsteroid(ast);
+		}
     
     //Enable physics on these two sprites
-    game.physics.arcade.enable(eSprite);
-    game.physics.arcade.enable(asteroid);
+ 
     
-    cursors = game.inp	ut.keyboard.createCursorKeys();
+    cursors = game.input.keyboard.createCursorKeys();
 
-    asteroid.body.gravity.y = 0;
-    asteroid.body.gravity.x = 0;
-    asteroid.body.collideWorldBounds = true;
-    asteroid.anchor.setTo(0.5,0);
-    
-	 
+//    asteroid.body.gravity.y = 0;
+//    asteroid.body.gravity.x = 0;
+//    asteroid.body.collideWorldBounds = true;
+//    asteroid.anchor.setTo(0.5,0);
+   
 
-	
     eSprite.body.gravity.y = 0;
     eSprite.body.gravity.x = 0;
     eSprite.body.collideWorldBounds = true;
     eSprite.anchor.setTo(0.5, 0.5);
     
 //	 game.time.events.loop(Phaser.Timer.SECOND, updateCounter, this);
-	game.time.events.loop(Phaser.Timer.SECOND * 5, moveAsteroid, this);
+	
 	
     key2 = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     key2.onDown.add(fire,this);
@@ -85,6 +91,8 @@ var asteroidTime = 0;
 
 function update() {
 
+	game.physics.arcade.overlap(bullets, asteroids, collisionHandler, null, this);
+	
     if (cursors.left.isDown)
     {
          if(!cursors.up.isDown&&!cursors.down.isDown)
@@ -181,9 +189,10 @@ function addPhaserDude () {
 
     function fire()
     {
-        
-      var newBullet = game.add.sprite(eSprite.x, eSprite.y, 'b');
-        game.physics.arcade.enable(newBullet);
+//          var panda = pandas.create(game.world.randomX, game.world.randomY, 'panda');
+//      var newBullet = game.add.sprite(eSprite.x, eSprite.y, 'b');
+		var newBullet = bullets.create(eSprite.x, eSprite.y, 'b');
+//        game.physics.arcade.enable(newBullet);
 		newBullet.anchor.setTo(0.5,1);
         newBullet.angle = eSprite.angle;
 //        newBullet.body.velocity.y = -50;
@@ -192,8 +201,14 @@ function addPhaserDude () {
         
     }
 
-function moveAsteroid()
+function moveAsteroid(asteroid)
 {
 	asteroid.rotation = game.physics.arcade.moveToXY(asteroid, game.world.randomX, game.world.randomY,300,5000);
+	game.time.events.loop(Phaser.Timer.SECOND * 5, moveAsteroid(asteroid), this);
 }
 
+function collisionHandler(bul, ast)
+{
+	bul.kill();
+	ast.kill();
+}
