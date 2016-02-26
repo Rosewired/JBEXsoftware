@@ -3,7 +3,7 @@
 //This is what starts the game by making a new Phaser game object
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'TEST', { preload: preload, create: create, update: update });
 
-//This functino loads all of the images used in the game ahead of time. It assigns each of them a tag which you can use to reference it.
+//This function loads all of the images used in the game ahead of time. It assigns each of them a tag which you can use to reference it.
 function preload() {
     game.load.image('e',STATIC_URL+'images/ship.png');
     game.load.image('b',STATIC_URL+'images/bullet.png');
