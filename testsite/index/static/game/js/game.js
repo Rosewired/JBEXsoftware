@@ -77,8 +77,7 @@ function create() {
     cursors = game.input.keyboard.createCursorKeys();
 
 	//Make the asteroids move by continually callng moveAsteroid()
-	 game.time.events.loop(Phaser.Timer.SECOND*10, 
-moveAsteroid, this);
+	 game.time.events.loop(Phaser.Timer.SECOND*10, moveAsteroid, this);
 	
 	//fire button
     key2 = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -233,21 +232,17 @@ function addPhaserDude () {
     }
 
 //This function moves all of the members of the asteroids group
-function moveAsteroid()
-{
-	
-	for(var i = 0; i < asteroids.children.length; i ++)
-		{
-			if(asteroids.children[i].alive)
-				{ 
-					//Point in random angle
-					asteroids.children[i].angle += game.rnd.integerInRange(-180, 180);
+function moveAsteroid() {
+	for(var i = 0; i < asteroids.children.length; i ++) {
+		if(asteroids.children[i].alive) { 
+			//Point in random angle
+			asteroids.children[i].angle += game.rnd.integerInRange(-180, 180);
 
-	//Go forwards				
-	game.physics.arcade.velocityFromRotation(asteroids.children[i].rotation, 50, asteroids.children[i].body.velocity);
-	game.physics.arcade.moveToXY(asteroids.childen[i], game.world.randomX, game.world.randomY,300,5000);
+			//Go forwards				
+			game.physics.arcade.velocityFromRotation(asteroids.children[i].rotation, 50, asteroids.children[i].body.velocity);
+			game.physics.arcade.moveToXY(asteroids.children[i], game.world.randomX, game.world.randomY,300,5000);
 		}
-		}
+	}
 
 }
 
