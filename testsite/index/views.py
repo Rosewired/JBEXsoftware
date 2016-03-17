@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from login import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+import models
 
 def Login(request):
     next = request.GET.get('next', '/home/')
@@ -35,6 +36,12 @@ def Logout(request):
     logout(request)
     return render(request, 'logout.html')
     
+def test(request):
+	l = list(models.Words1.objects.all().values_list("word",flat=True))
+	a = models.testAdd(value = "asfoasfh")
+	a.save()
+	return render(request, 'test.html', {'value':l})
+
 def register_user(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -51,6 +58,7 @@ def register_user(request):
     
 def register_success(request):
     return render(request, 'register_success.html')
+
 
 @login_required
 def Home(request):
