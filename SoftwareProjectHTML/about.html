@@ -1,0 +1,83 @@
+
+{% load staticfiles %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="{% static 'about/dist/sweetalert.min.js' %}"></script>
+	<script src="{% static 'about/dist/swal-forms.js' %}"></script>
+	<script src="{% static 'about/js/jquery-1.12.0.min.js' %}"></script>
+	
+	<link rel="stylesheet" type="text/css" href="{% static 'about/dist/sweetalert.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'about/themes/google/google.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'about/css/swal-forms.css' %}">
+	
+	<style>
+		margin:auto;
+	</style>
+</head>
+
+<body background="{% static 'about/background.jpg' %}">
+	<script>
+		function aboutFunct() {
+			swal({
+				title: "About",
+				text: "Space Spellers is a fun way to develop spelling skills while saving the galaxy at the same time! Pilot a starship to destroy as many misspelled asteroids as you can in the time limit! Available for grades 1st through 5th.",
+			});
+		}
+		
+		function studentFunct() {
+			swal.withForm({
+      			title: "Student Login", 
+      			text: "Please Enter Your Login Information",
+      			showCancelButton: true,
+     			closeOnConfirm: true,
+				formFields: [
+					{ id: 'name', placeholder: 'username' },
+					{ id: 'password', type: 'password' }
+				]
+    		}, function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+							type: "post",
+							url: "/login/",
+							data: {
+								csrfmiddlewaretoken: '{{ csrf_token }}', 
+								username: document.getElementById('name').value, 
+								password: document.getElementById('password').value 
+							},
+							success: function(response) {
+								// data.redirect contains the string URL to redirect to
+								window.location.href = response
+							}
+					})
+				}
+   			});
+		}
+		
+		function teacherFunct() {
+			swal({
+      			title: "Teacher Login", 
+      			text: "Please Enter Your Username",
+      			type: "input",
+      			inputType: "text",
+      			showCancelButton: true,
+     			 closeOnConfirm: false
+    		}, function(teacherUser) {
+				console.log(teacherUser);
+   			});
+		}
+	</script>
+	<div style="left:50%">  
+		<img style="position:absolute;top:325px;left:725px" src="{% static 'about/fire.gif' %}">  
+		<img style="position:absolute;top:0px;left:300px" src="{% static 'about/title.png' %}">
+		
+		{% csrf_token %}
+		<input type="image" src="{% static 'about/about.png' %}" style="position:absolute;top:25px;left:75px" onClick="aboutFunct();">
+		<input type="image" src="{% static 'about/students.png' %}" style="position:absolute;top:75px;left:900px" onClick="studentFunct();">
+		<input type="image" src="{% static 'about/teachers.png' %}" style="position:absolute;top:350px;left:125px" onClick="teacherFunct();">
+		
+	</div>
+</body>
+</html>
