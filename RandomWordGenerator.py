@@ -28,6 +28,8 @@ l = ['ladder','cat','angry']
 '''The dictionary used to spellcheck words. An instance of enchant.Dict must be created in order to use this method. Enchant must also be installed and imported.'''
 d = enchant.Dict("en_US")
 
+def isVowel(vowel):
+    return vowel.lower() =='a' or vowel.lower() == 'e' or vowel.lower() == 'i' or vowel.lower() == 'o' or vowel.lower() == 'u'
 
 '''
 Generates a mispelled word based off the word passed to this function and returns it.
@@ -55,6 +57,7 @@ def generateWord(word):
     cList = []
     
     doubleConsLoc = 0;
+    doubleVList = []
     
     doubleCons = False
     containVowel = False
@@ -62,22 +65,25 @@ def generateWord(word):
     '''Check for double consonants and also note the positions of vowels as we go along.'''
     for i in xrange(0,len(word)-1):
         
+        print word
         if(word[i] == word[i+1]):
             doubleCons = True
             doubleConsLoc = i
             
-        if(word[i].lower() == 'a' or word[i].lower() == 'e' or word[i].lower() == 'i' or word[i].lower() == 'o' or word[i].lower() == 'u'):
+        if(isVowel(word[i])):
             containVowel = True
             vList.append((i,list(vowels)))
-            vList[len(vList)-1][1].remove(word[i])        
+            print vList
+            print word[i]
+            vList[len(vList)-1][1].remove(word[i].lower())        
         else:
             cList.append(i)
     
     '''Check the last index in the word, since we stopped at the second to last so that the double letter check did not go out of bounds.'''
     v = word[len(word)-1]
-    if(v == 'a' or v == 'e' or v == 'i' or v == 'o' or v == 'u'):
+    if(isVowel(v)):
         vList.append((len(word)-1,list(vowels)))
-        vList[len(vList)-1][1].remove(word[i])
+        vList[len(vList)-1][1].remove(v.lower())
 
     '''Letter substitution begins'''
     if(containVowel and doubleCons):
@@ -132,7 +138,7 @@ def generateWord(word):
                 if(len(vList[pos][1]) > 0):
                     print str(newWord)+" |",
                     
-                    newVowel = vList[pos][1][random.randrange(len(vList[0][1]))]
+                    newVowel = vList[pos][1][random.randrange(len(vList[pos][1]))]
                     newWord = str(word[:index])+str(newVowel)+str(word[index+1:])
                     
                     
@@ -154,13 +160,13 @@ wordFile = open("words1.txt",'r')
 wList = [line.split() for line in wordFile.readlines()]
 
 millis = int(time.time() * 1000)
-for i in xrange(0,1):
+for i in xrange(0,1000):
     
-#     print generateWord("bid")
-    
-    print generateWord(wList[random.randrange(len(wList))][0])
+#     print generateWord("pouch")
+     print generateWord(wList[random.randrange(len(wList))][0])
 
 print (time.time()*1000-millis)
+
     
     
     
