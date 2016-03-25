@@ -45,20 +45,6 @@ def test(request):
     
     return render(request, 'test.html', {'words':json_words})
 
-'''
-def randomGenerator():
-    l = list(models.Words1.objects.all().values_list("word",flat=True))
-    random_list = []
-    
-    for i in range(5):
-        index = randint(0, len(l)-1)
-        random_list.append(l[index])
-
-    json_words = json.dumps(random_list)
-    
-    return json_words
-'''
-
 def register_user(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

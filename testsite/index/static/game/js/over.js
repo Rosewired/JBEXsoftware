@@ -11,6 +11,6 @@ bubble_pop.GameOver.prototype = {
 		restartGame.onDown.add(this.playAgain, this);
 	},
 	playAgain: function() {
-		this.game.state.start('PlayGame');
+		this.game.state.start('Preload', true, true);
 	}
 }

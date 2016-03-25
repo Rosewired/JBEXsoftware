@@ -1,7 +1,7 @@
 import random
 import time
 import enchant
-from random import randint
+from random import shuffle
 import json
 import models
 
@@ -64,8 +64,6 @@ def generateMisspelledWord(word):
     
     '''Check for double consonants and also note the positions of vowels as we go along.'''
     for i in xrange(0,len(word)-1):
-        
-        print word
         if(word[i] == word[i+1]):
             doubleCons = True
             doubleConsLoc = i
@@ -73,8 +71,6 @@ def generateMisspelledWord(word):
         if(isVowel(word[i])):
             containVowel = True
             vList.append((i,list(vowels)))
-            print vList
-            print word[i]
             vList[len(vList)-1][1].remove(word[i].lower())        
         else:
             cList.append(i)
@@ -134,9 +130,7 @@ def generateMisspelledWord(word):
             
             while(True):
                 
-                if(len(vList[pos][1]) > 0):
-                    print str(newWord)+" |",
-                    
+                if(len(vList[pos][1]) > 0):                  
                     newVowel = vList[pos][1][random.randrange(len(vList[pos][1]))]
                     newWord = str(word[:index])+str(newVowel)+str(word[index+1:])
                     
@@ -148,7 +142,7 @@ def generateMisspelledWord(word):
                 else:
                     vList.pop(pos)
                     if(len(vList)==0):
-                        return -1
+                        return
             '''Vowel'''
     elif doubleCons:
         return str(word[:doubleConsLoc])+str(word[doubleConsLoc+1:])
@@ -168,21 +162,30 @@ for i in xrange(0,100000):
 print (time.time()*1000-millis)
 '''
 
-    '''
+    
 def generateRandomWords():
     l = list(models.Words1.objects.all().values_list("word",flat=True))
     random_list = []
-    
+
+    #Shuffle the original list of words some times
     for i in range(5):
-        word = (l[randint(0, len(l)-1)], '1')
-        print(word)
-        if (i == 2):
-            print("run misspell now")
-            word = (generateMisspelledWord(word[0]), '0')
-            
+        shuffle(l)
+
+    #Construct the list of words that is mixed between correct and misspelled words
+    for i in range(0,len(l)/2):
+        #Correct words
+        word = (l[i], '1')
+        random_list.append(word)
+        #Misspelled words
+        word = (generateMisspelledWord(l[(len(l)/2)+i]), '0')
         random_list.append(word)
 
+    #Shuffle the mixed list of words some times
+    for i in range(5):
+        shuffle(random_list)
+
+    #Put the list in json
     json_words = json.dumps(random_list)
     
     return json_words
-    '''
+    

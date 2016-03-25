@@ -18,8 +18,6 @@ var rand;
 var p_button; //pause button
 var score = 0; //user's score
 var score_text; //display score
-var game_world = [];
-var game_state = { color: "", position: 0 };
 
 
 bubble_pop.game.state.add('Preload', bubble_pop.Preload);

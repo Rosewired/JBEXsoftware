@@ -9,7 +9,7 @@
 	<title>Space Spellers</title>
 	<script type="text/javascript">
 		var STATIC_URL = "{% static 'game/' %}";
-		var words = {{ value|safe }}
+		var words = {{ value|safe }};
 	</script>
 	<script type="text/javascript" src="{% static 'game/js/lib/phaser.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'game/js/preload.js' %}"></script>

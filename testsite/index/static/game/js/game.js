@@ -24,18 +24,20 @@ bubble_pop.PlayGame.prototype = {
 		//Add asteroids to the asteroid group and then set their physics properties
 		//Add word on top of the asteroid and set the word as a child of the asteroid
 		for(var k = 0; k < 5; k++) {
-			var ast = asteroids.create(this.game.world.randomX, this.game.world.randomY, 'a');
+			var ast = asteroids.create(this.game.world.randomX, this.game.world.randomY, 'asteroid');
+			
+			var rand_num = this.game.rnd.integerInRange(0, words.length-1); //Get a random index from 'words'
+			
+			text = this.game.add.text(0, 0, words[rand_num][0], { font: "16px Arial", fill: "#ffffff", wordWrap: true, align: "center", backgroundColor: "" });
+			text.anchor.set(0.5);
+			ast.addChild(text); //Attach word to sprite
 			
 			/* Give asteroid a property for correct/misspelled word */
-			if (words[k][1] == "0")
+			if (words[rand_num][1] == "0")
 				ast.isCorrect = false;
 			else
 				ast.isCorrect = true;
 			/* end custom property */
-			
-			text = this.game.add.text(0, 0, words[k][0], { font: "16px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: ast.width, align: "center", backgroundColor: "" });
-			text.anchor.set(0.5);
-			ast.addChild(text); //Attach word to sprite
 		}
 		
 		//The anchor of a sprite is where its center is relative to the image. x=0,y=0 is the top left corner. x=1,y=1 is the bottom right corner
@@ -44,7 +46,7 @@ bubble_pop.PlayGame.prototype = {
 		asteroids.setAll('body.collideWorldBounds', true);
 
 		//Player
-		eSprite = this.game.add.sprite(100,100,'e');
+		eSprite = this.game.add.sprite(100,100,'ship');
 		this.game.physics.arcade.enable(eSprite);
 		eSprite.body.gravity.y = 0;
 		eSprite.body.gravity.x = 0;
@@ -157,7 +159,7 @@ bubble_pop.PlayGame.prototype = {
 	},
 	fire: function() { //Create and fire a bullet
 		//create a new bullet in the bullets group and place it at the ships position
-		var newBullet = bullets.create(eSprite.x, eSprite.y, 'b');
+		var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet');
 		newBullet.anchor.setTo(0.5,1);
 		newBullet.events.onOutOfBounds.add(this.resetBullet, this);
 
