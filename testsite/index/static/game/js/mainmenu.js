@@ -7,6 +7,6 @@ bubble_pop.MainMenu.prototype = {
 		
 	},
 	update: function() {
-		this.game.state.start('Game');
+		this.game.state.start('PlayGame');
 	}
 }

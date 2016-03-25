@@ -1,16 +1,15 @@
-var bubble_pop = bubble_pop || {};
+var bubble_pop = bubble_pop || {}
 
-bubble_pop.Game = function() {};
+bubble_pop.PlayGame = function() {}
 
-bubble_pop.Game.prototype = {
+bubble_pop.PlayGame.prototype = {
 	create: function() {
+		//Restart the score
+		score = 0;
+		
 		//This sets how the game handles collisions, etc.
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 		this.game.input.enabled = true;
-
-		s = this.game.add.sprite(this.game.world.randomX, this.game.world.randomY, 'e');
-		this.game.physics.arcade.enable(s);
-		s.body.velocity.y = 10;
 
 		//Group of bullets
 		bullets = this.game.add.group();
@@ -23,8 +22,20 @@ bubble_pop.Game.prototype = {
 		asteroids.physicsBodyType = Phaser.Physics.ARCADE;
 		
 		//Add asteroids to the asteroid group and then set their physics properties
-		for(var k  = 0; k < 5; k++) {
+		//Add word on top of the asteroid and set the word as a child of the asteroid
+		for(var k = 0; k < 5; k++) {
 			var ast = asteroids.create(this.game.world.randomX, this.game.world.randomY, 'a');
+			
+			/* Give asteroid a property for correct/misspelled word */
+			if (words[k][1] == "0")
+				ast.isCorrect = false;
+			else
+				ast.isCorrect = true;
+			/* end custom property */
+			
+			text = this.game.add.text(0, 0, words[k][0], { font: "16px Arial", fill: "#ffffff", wordWrap: true, wordWrapWidth: ast.width, align: "center", backgroundColor: "" });
+			text.anchor.set(0.5);
+			ast.addChild(text); //Attach word to sprite
 		}
 		
 		//The anchor of a sprite is where its center is relative to the image. x=0,y=0 is the top left corner. x=1,y=1 is the bottom right corner
@@ -55,22 +66,8 @@ bubble_pop.Game.prototype = {
 		p_button = this.game.add.button(5, 5, 'pause_button', this.actionOnClick, this);
 		
 		score_text = this.game.add.text(this.game.world.width/2, 5, 'Score: 0', { fontSize: '24px', fill: '#FFF' });
-		
-		/* text on sprite */
-		var style = { font: "16px Arial", fill: "#ff0044", wordWrap: true, wordWrapWidth: eSprite.width, align: "center", backgroundColor: "" };
-		
-		for(var i = 0; i < asteroids.children.length; i ++) {
-			text[i] = this.game.add.text(0, 0, words[i], style);
-			text[i].anchor.set(0.5);
-		}
-		/* end text on sprite */
 	},
 	update: function() {
-		//Attach word to sprite
-		for(var i = 0; i < asteroids.children.length; i ++) {
-			text[i].x = Math.floor(asteroids.children[i].x + asteroids.children[i].width/2.0 - text[i].width/2);
-			text[i].y = Math.floor(asteroids.children[i].y + asteroids.children[i].height/2.0 - text[i].height/2);
-		}
 		//Handle overlaps between members of the asteroids and bullets groups. It calls the collisionHandler method.
 		this.game.physics.arcade.collide(bullets, asteroids, this.collisionHandler, null, this);
 
@@ -146,17 +143,17 @@ bubble_pop.Game.prototype = {
 		}
 		
 		if (deadBody == asteroids.children.length) {
-			this.game.state.start('Over', true, false);
+			this.game.state.start('GameOver');
 		}
 	},
-	actionOnClick: function() {
+	actionOnClick: function() { //For pause button
 		var style = { font: "28px Arial", fill: "#ffffff", align: "center",};
 		this.game.paused = true;
 		var pausedText = this.add.text(250, 260, "Game paused.\nTap anywhere to continue.", style);
-		this.input.onDown.add(function(){
+		this.input.onDown.add(function(){ //unpause
 			pausedText.destroy();
 			this.game.paused = false;
-		});
+		}, this);
 	},
 	fire: function() { //Create and fire a bullet
 		//create a new bullet in the bullets group and place it at the ships position
@@ -172,11 +169,9 @@ bubble_pop.Game.prototype = {
 	moveAsteroid: function() { //This function moves all of the members of the asteroids group
 		for(var i = 0; i < asteroids.children.length; i ++) {
 			if(asteroids.children[i].alive) { 
-				//Point in random angle
-				asteroids.children[i].angle += this.game.rnd.integerInRange(-180, 180);
-
-				//Go forwards				
-				this.game.physics.arcade.velocityFromRotation(asteroids.children[i].rotation, 50, asteroids.children[i].body.velocity);
+				//Set direction to a random angle		
+				this.game.physics.arcade.velocityFromAngle(this.game.rnd.integerInRange(0, 360), 50, asteroids.children[i].body.velocity);
+				//Move forward
 				this.game.physics.arcade.moveToXY(asteroids.children[i], this.game.world.randomX, this.game.world.randomY,300,5000);
 			}
 		}
@@ -185,10 +180,11 @@ bubble_pop.Game.prototype = {
 		bul.kill();
 	},
 	collisionHandler: function(bul, ast) { //This removes a bullet and an asteroid that collide.
-		bul.kill();
-		ast.kill();
+		bul.kill(); //Kill the bullet
+		ast.kill(); //Kill the asteroid that got shot
 		
-		score+=1; //update score
+		if (!ast.isCorrect) //If user hits misspelled word, increase score
+			score+=1; 
 		score_text.text = "Score: " + score;
 	}
 }

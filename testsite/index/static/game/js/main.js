@@ -20,11 +20,11 @@ var score = 0; //user's score
 var score_text; //display score
 var game_world = [];
 var game_state = { color: "", position: 0 };
-var text = [];
+
 
 bubble_pop.game.state.add('Preload', bubble_pop.Preload);
 bubble_pop.game.state.add('MainMenu', bubble_pop.MainMenu);
-bubble_pop.game.state.add('Game', bubble_pop.Game);
-bubble_pop.game.state.add('Over', bubble_pop.Over);
+bubble_pop.game.state.add('PlayGame', bubble_pop.PlayGame);
+bubble_pop.game.state.add('GameOver', bubble_pop.GameOver);
 
 bubble_pop.game.state.start('Preload');

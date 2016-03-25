@@ -154,11 +154,11 @@ def generateRandomWords():
     random_list = []
     
     for i in range(5):
-        word = l[randint(0, len(l)-1)]
+        word = (l[randint(0, len(l)-1)], '1')
         print(word)
         if (i == 2):
-            print("run misspelled: " + word)
-            word = generateMisspelledWord(word)
+            print("run misspell now")
+            word = (generateMisspelledWord(word[0]), '0')
             
         random_list.append(word)
 
