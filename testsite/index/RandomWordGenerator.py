@@ -28,6 +28,8 @@ To do still:
 '''The dictionary used to spellcheck words. An instance of enchant.Dict must be created in order to use this method. Enchant must also be installed and imported.'''
 d = enchant.Dict("en_US")
 
+def isVowel(vowel):
+    return vowel.lower() =='a' or vowel.lower() == 'e' or vowel.lower() == 'i' or vowel.lower() == 'o' or vowel.lower() == 'u'
 
 '''
 Generates a mispelled word based off the word passed to this function and returns it.
@@ -46,7 +48,7 @@ def generateMisspelledWord(word):
     vList = [(1, ['e', 'i', 'o', 'u']),(3, ['a','i', 'o', 'u'])]
     (Notice it does not store the vowel at that position [ position 1 is a, so we don't store a in the tuple with 1], because it would be pointless to swap out one letter for the same one.
     Whenever the algorithm generates a word that is not mispelled, it will remove the vowel it just tried to add from the proper index.
-    For example, if we generated 'cone', then it would remove '0' from the 1 tuple, as 'cone' is a correctly spelled word.
+    For example, if we generated 'cone', then it would remove 'o' from the 1 tuple, as 'cone' is a correctly spelled word.
     
     '''
     vList = []
@@ -55,6 +57,7 @@ def generateMisspelledWord(word):
     cList = []
     
     doubleConsLoc = 0;
+    doubleVList = []
     
     doubleCons = False
     containVowel = False
@@ -62,22 +65,25 @@ def generateMisspelledWord(word):
     '''Check for double consonants and also note the positions of vowels as we go along.'''
     for i in xrange(0,len(word)-1):
         
+        print word
         if(word[i] == word[i+1]):
             doubleCons = True
             doubleConsLoc = i
             
-        if(word[i].lower() == 'a' or word[i].lower() == 'e' or word[i].lower() == 'i' or word[i].lower() == 'o' or word[i].lower() == 'u'):
+        if(isVowel(word[i])):
             containVowel = True
             vList.append((i,list(vowels)))
-            vList[len(vList)-1][1].remove(word[i])        
+            print vList
+            print word[i]
+            vList[len(vList)-1][1].remove(word[i].lower())        
         else:
             cList.append(i)
     
     '''Check the last index in the word, since we stopped at the second to last so that the double letter check did not go out of bounds.'''
     v = word[len(word)-1]
-    if(v == 'a' or v == 'e' or v == 'i' or v == 'o' or v == 'u'):
+    if(isVowel(v)):
         vList.append((len(word)-1,list(vowels)))
-        vList[len(vList)-1][1].remove(word[i])
+        vList[len(vList)-1][1].remove(v.lower())
 
     '''Letter substitution begins'''
     if(containVowel and doubleCons):
@@ -98,9 +104,8 @@ def generateMisspelledWord(word):
                 if(len(vList[pos][1]) > 0):
                     print str(newWord)+" |",
                     
-                    newVowel = vList[pos][1][random.randrange(len(vList[0][1]))]
+                    newVowel = vList[pos][1][random.randrange(len(vList[pos][1]))]
                     newWord = str(word[:index])+str(newVowel)+str(word[index+1:])
-                    
                     
                     if(newVowel != word[index] and not d.check(newWord)):
                         return newWord
@@ -147,8 +152,23 @@ def generateMisspelledWord(word):
             '''Vowel'''
     elif doubleCons:
         return str(word[:doubleConsLoc])+str(word[doubleConsLoc+1:])
-
     
+    
+'''Open word list and read it to list'''
+'''
+wordFile = open("words1.txt",'r')
+wList = [line.split() for line in wordFile.readlines()]
+
+millis = int(time.time() * 1000)
+for i in xrange(0,100000):
+    
+
+    print generateWord(wList[random.randrange(len(wList))][0])
+
+print (time.time()*1000-millis)
+'''
+
+    '''
 def generateRandomWords():
     l = list(models.Words1.objects.all().values_list("word",flat=True))
     random_list = []
@@ -165,21 +185,4 @@ def generateRandomWords():
     json_words = json.dumps(random_list)
     
     return json_words
-
-
-'''Open word list and read it to list
-wordFile = open("words1.txt",'r')
-wList = [line.split() for line in wordFile.readlines()]
-
-millis = int(time.time() * 1000)
-for i in xrange(0,1):
-    
-#     print generateWord("bid")
-    
-    print generateWord(wList[random.randrange(len(wList))][0])
-
-print (time.time()*1000-millis)
-'''
-    
-    
-    
+    '''
