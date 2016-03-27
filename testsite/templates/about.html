@@ -1,4 +1,3 @@
-
 {% load staticfiles %}
 
 
@@ -40,32 +39,48 @@
     		}, function(isConfirm) {
 				if (isConfirm) {
 					$.ajax({
-							type: "post",
-							url: "/login/",
-							data: {
-								csrfmiddlewaretoken: '{{ csrf_token }}', 
-								username: document.getElementById('name').value, 
-								password: document.getElementById('password').value 
-							},
-							success: function(response) {
-								// data.redirect contains the string URL to redirect to
-								window.location.href = response
-							}
+						type: "post",
+						url: "/slogin/",
+						data: {
+							csrfmiddlewaretoken: '{{ csrf_token }}', 
+							username: document.getElementById('name').value, 
+							password: document.getElementById('password').value 
+						},
+						success: function(response) {
+							// data.redirect contains the string URL to redirect to
+							window.location.href = response;
+						}
 					})
 				}
    			});
 		}
 		
 		function teacherFunct() {
-			swal({
+			swal.withForm({
       			title: "Teacher Login", 
       			text: "Please Enter Your Username",
-      			type: "input",
-      			inputType: "text",
       			showCancelButton: true,
-     			 closeOnConfirm: false
-    		}, function(teacherUser) {
-				console.log(teacherUser);
+     			closeOnConfirm: true,
+				formFields: [
+					{ id: 'name', placeholder: 'username' },
+					{ id: 'password', type: 'password' }
+				]
+    		}, function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+						type: "post",
+						url: "/tlogin/",
+						data: {
+							csrfmiddlewaretoken: '{{ csrf_token }}', 
+							username: document.getElementById('name').value, 
+							password: document.getElementById('password').value 
+						},
+						success: function(response) {
+							// data.redirect contains the string URL to redirect to
+							window.location.href = response;
+						}
+					})
+				}
    			});
 		}
 	</script>

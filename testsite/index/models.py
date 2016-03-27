@@ -8,7 +8,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+from django.contrib.auth.models import User
 
 
 class Words1(models.Model):
@@ -62,12 +62,8 @@ class testAdd(models.Model):
 		db_table = 'testAdd'
 
 
-'''
-class Words6(models.Model):
-    word = models.TextField(blank=True, null=True)  # This field type is a guess.
-    id = models.TextField(primary_key=True, blank=True, null=True)  # This field type is a guess.
-
-    class Meta:
-        managed = False
-        db_table = 'words6'
-'''
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    score = models.CharField(max_length=50)
+    
+User.profile = property(lambda u: UserProfile.objects.create(user=u))

@@ -1,0 +1,256 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="{% static 'about/dist/sweetalert.min.js' %}"></script>
+	<script src="{% static 'about/dist/swal-forms.js' %}"></script>
+	<script src="{% static 'about/js/jquery-1.12.0.min.js' %}"></script>
+	
+	<link rel="stylesheet" type="text/css" href="{% static 'about/dist/sweetalert.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'about/themes/google/google.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'about/css/swal-forms.css' %}">
+
+<style>
+	#header {
+		background-color:#6B8E23;
+		color:white;
+		padding:5px;
+		border-style:outset;
+		border-color:#6B8E23;
+		border-width:5px;
+		text-align:center;
+		font-family:verdana;
+		font-size:30px;
+		}
+	body {
+		background-color:#FFEBCD;
+		}
+		
+	table {
+    	border-collapse: collapse;
+    	width: 100%;
+	}
+	
+	th, td {
+		border: 1px solid #ddd;
+    	text-align: center;
+    	padding: 8px;
+	}
+
+	tr:nth-child(even){background-color: #f2f2f2}
+
+	th {
+   	background-color: #6B8E23;
+    color: white;
+	}
+	
+	.button1 {
+    background-color: #6B8E23;
+    border-style: outset;
+    border-color: #6B8E23;
+    border-width: 5px;
+    color: white;
+    padding: 7px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+	}
+	
+	.button2 {
+    background-color: #6B8E23;
+    border-style: outset;
+    border-color: #6B8E23;
+    border-width: 5px;
+    color: white;
+    padding: 7px 30px;
+    text-align: right;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 5px;
+    cursor: pointer;
+    float:right;
+	}
+</style>
+<script>
+	function addFunct() {
+		swal.withForm({
+      			title: "Add Student", 
+      			text: "Please Enter Student Information",
+      			showCancelButton: true,
+     			closeOnConfirm: true,
+				formFields: [
+					{ id: 'firstname', placeholder: 'First Name' },
+					{ id: 'lastname', placeholder: 'Last Name' },
+					{ id: 'username', placeholder: 'Username' },
+					{ id: 'password', placeholder: 'Password' }
+				]
+    		}, function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+							type: "post",
+							url: "/login/",
+							data: {
+								csrfmiddlewaretoken: '{{ csrf_token }}', 
+								firstname: document.getElementById('firstname').value, <!--Send First Name here.-->
+								lastname: document.getElementById('lastname').value, <!--Send Last Name here.-->
+								username: document.getElementById('username').value, <!--Send Username here.-->
+							    password: document.getElementById('password').value, <!--Send Password here.-->
+								
+								
+							},
+							success: function(response) {
+								// data.redirect contains the string URL to redirect to
+								window.location.href = response
+							}
+					})
+				}
+   			});
+		}
+		
+		function removeFunct() {
+		swal.withForm({
+      			title: "Remove Student", 
+      			text: "Please Select a Student",
+      			showCancelButton: true,
+     			closeOnConfirm: true,
+     			formFields: [
+					{ id: 'select', type: 'select', options: [ <!--Populate with student names here.-->
+          				{value: 'remove', text: 'Jim Student'}
+      				]}
+      			]
+    		}, function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+							type: "post",
+							url: "/login/",
+							data: {
+								csrfmiddlewaretoken: '{{ csrf_token }}', 
+								remove: document.getElementById('remove').value <!--Send selection here.-->
+							},
+							success: function(response) {
+								// data.redirect contains the string URL to redirect to
+								window.location.href = response
+							}
+					})
+				}
+   			});
+		}
+	</script>
+</head>
+<body>
+	<img style="border-width:10px; border-radius:50%; border-style:outset; border-color:#6B8E23; position:absolute; top:-14px; left:-27px;" src="{% static 'about/teacherimagetest.png' %}"> <!--Teacher Image here.-->
+	<div id="header">
+		Welcome, Teacher! <!--Teacher Name here.-->
+	</div>
+	<button class="button2">Profile</button>	
+	<br>
+	<br>
+	<center>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		You currently have 0 students. <!--# of Students here.-->
+	</center>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<table> <!--Populate table here.-->
+  		<tr>
+    		<th>First Name</th>
+    		<th>Last Name</th>
+    		<th>Best Score</th>
+       		<th>Date</th>
+        	<th>Most Recent Score</th>
+        	<th>Date</th>
+        	<th>Second Most Recent Score</th>
+        	<th>Date</th>
+        	
+  		</tr>
+  		<tr>
+    		<td>Student</td>
+    		<td>Test</td>
+    		<td>100</td>
+    		<td>1/30/16</td>
+    		<td>99</td>
+    		<td>2/24/16</td>
+    		<td>100</td>
+    		<td>1/30/16</td>
+  		</tr>
+  		<tr>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+  		</tr>
+  		<tr>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+  		</tr>
+  		<tr>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+  		</tr>
+  		<tr>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+  		</tr>
+  		<tr>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+  		</tr>
+  		<tr>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+  		</tr>
+	</table>
+	<br>
+	<br>
+	<center>
+		<button class="button1" onClick="addFunct();">Add Student</button>
+		&nbsp;
+		&nbsp;
+		&nbsp;
+		&nbsp;
+		<button class="button1" onClick="removeFunct();">Remove Student</button>
+	</center>
+</body>
+</html>

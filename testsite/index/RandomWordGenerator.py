@@ -98,8 +98,6 @@ def generateMisspelledWord(word):
             while(True):
                 
                 if(len(vList[pos][1]) > 0):
-                    print str(newWord)+" |",
-                    
                     newVowel = vList[pos][1][random.randrange(len(vList[pos][1]))]
                     newWord = str(word[:index])+str(newVowel)+str(word[index+1:])
                     
