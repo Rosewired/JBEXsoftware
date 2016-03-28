@@ -11,6 +11,14 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'about/themes/google/google.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'about/css/swal-forms.css' %}">
 
+	<script type="text/javascript">
+		var objs = {{ ex|safe }};
+		var scores = {{ ex2|safe }}
+		
+		window.onload = function() {
+			document.getElementById("nos").innerHTML = "" + objs.length
+		}
+	</script>
 <style>
 	#header {
 		background-color:#6B8E23;
@@ -152,96 +160,44 @@
 	<br>
 	<center>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		You currently have 0 students. <!--# of Students here.-->
+		<h3>Number of Students</h3> <h1 id="nos"></h1> <!--# of Students here.-->
 	</center>
 	<br>
 	<br>
 	<br>
 	<br>
 	<br>
-	<table> <!--Populate table here.-->
-  		<tr>
-    		<th>First Name</th>
-    		<th>Last Name</th>
-    		<th>Best Score</th>
-       		<th>Date</th>
-        	<th>Most Recent Score</th>
-        	<th>Date</th>
-        	<th>Second Most Recent Score</th>
-        	<th>Date</th>
-        	
-  		</tr>
-  		<tr>
-    		<td>Student</td>
-    		<td>Test</td>
-    		<td>100</td>
-    		<td>1/30/16</td>
-    		<td>99</td>
-    		<td>2/24/16</td>
-    		<td>100</td>
-    		<td>1/30/16</td>
-  		</tr>
-  		<tr>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-  		</tr>
-  		<tr>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-  		</tr>
-  		<tr>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-  		</tr>
-  		<tr>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-  		</tr>
-  		<tr>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-  		</tr>
-  		<tr>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-  		</tr>
+	
+	<table>
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Score</th>
+		</tr>
 	</table>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var user;
+			var d_date; 
+			var tr;
+			var td;
+			
+			for (var i = 0; i < objs.length; i++) {
+				tr = $('<tr/>');
+				user = objs[i].fields.username;
+				tr.append("<td>" + objs[i].fields.firstname + "</td>");
+				tr.append("<td>" + objs[i].fields.lastname + "</td>");
+				td = $('<td/>');
+				for (var j = 0; j < scores[user].length; j++) {
+					d_date = new Date(scores[user][j][0])
+					td.append(scores[user][j][1] + " on " + d_date + "<br>");					
+				}
+				tr.append(td);
+				
+				$('table').append(tr);
+			}
+		});
+	</script>
 	<br>
 	<br>
 	<center>

@@ -25,7 +25,7 @@ bubble_pop.GameOver.prototype = {
 					score: score
 				},
 				success: function(response) {
-					console.log("good");
+					
 				}
 			})
 		});

@@ -17,6 +17,6 @@ urlpatterns = [
     url(r'^accounts/success/$', views.register_success),
     url(r'^game/$', views.gamePage),
     url(r'^about/$', views.about),
-    url(r'^test/$', views.user_profile),
+    url(r'^test/$', views.add_score),
     url(r'^teacher/$', views.teacherPage),
 ]
