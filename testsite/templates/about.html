@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'about/dist/sweetalert.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'about/themes/google/google.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'about/css/swal-forms.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'about/css/front-page.css' %}">
 	
 	<style>
 		margin:auto;
@@ -84,7 +85,7 @@
    			});
 		}
 	</script>
-	<div style="left:50%">  
+	<div id="middlePage">  
 		<img style="position:absolute;top:325px;left:725px" src="{% static 'about/fire.gif' %}">  
 		<img style="position:absolute;top:0px;left:300px" src="{% static 'about/title.png' %}">
 		
@@ -94,5 +95,8 @@
 		<input type="image" src="{% static 'about/teachers.png' %}" style="position:absolute;top:350px;left:125px" onClick="teacherFunct();">
 		
 	</div>
+	<div style="position:relative; bottom:10px; text-align:right;">
+		<p><font color="white">VERSION: r2</font></p>
+	</div>	
 </body>
 </html>
