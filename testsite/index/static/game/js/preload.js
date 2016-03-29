@@ -4,6 +4,9 @@ bubble_pop.Preload = function() {};
 
 bubble_pop.Preload.prototype = {
 	preload: function() {
+		this.game.scale.pageAlignHorizontally = true;
+		this.game.scale.refresh();
+		
 		this.load.image('ship',STATIC_URL+'images/ship.png');
 		this.load.image('bullet',STATIC_URL+'images/bullet.png');
 		this.load.image('asteroid',STATIC_URL+'images/asteroid.png');
