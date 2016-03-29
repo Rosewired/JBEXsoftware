@@ -140,7 +140,7 @@ def generateMisspelledWord(word):
                 else:
                     vList.pop(pos)
                     if(len(vList)==0):
-                        return
+                        return -1
             '''Vowel'''
     elif doubleCons:
         return str(word[:doubleConsLoc])+str(word[doubleConsLoc+1:])
