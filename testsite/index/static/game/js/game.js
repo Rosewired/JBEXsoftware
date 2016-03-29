@@ -32,6 +32,7 @@ bubble_pop.PlayGame.prototype = {
 			text.anchor.set(0.5);
 			ast.addChild(text); //Attach word to sprite
 			
+			ast.number = rand_num;
 			/* Give asteroid a property for correct/misspelled word */
 			if (words[rand_num][1] == "0")
 				ast.isCorrect = false;
@@ -57,6 +58,7 @@ bubble_pop.PlayGame.prototype = {
 		cursors = this.game.input.keyboard.createCursorKeys();
 
 		//Make the asteroids move by continually callng moveAsteroid()
+		this.moveAsteroid();
 		this.game.time.events.loop(Phaser.Timer.SECOND*10, this.moveAsteroid, this);
 		
 		//fire button
@@ -185,8 +187,11 @@ bubble_pop.PlayGame.prototype = {
 		bul.kill(); //Kill the bullet
 		ast.kill(); //Kill the asteroid that got shot
 		
-		if (!ast.isCorrect) //If user hits misspelled word, increase score
+		if (!ast.isCorrect){ //If user hits misspelled word, increase score
 			score+=1; 
 		score_text.text = "Score: " + score;
+	text = this.game.add.text(ast.x, ast.y, words[ast.number][2], { font: "16px Arial", fill: "#ffffff", wordWrap: true, align: "center", backgroundColor: "" });
+		
+	}
 	}
 }

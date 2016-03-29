@@ -175,7 +175,7 @@ def generateRandomWords():
         word = (l[i], '1')
         random_list.append(word)
         #Misspelled words
-        word = (generateMisspelledWord(l[(len(l)/2)+i]), '0')
+        word = (generateMisspelledWord(l[(len(l)/2)+i]), '0',l[(len(l)/2)+i])
         random_list.append(word)
 
     #Shuffle the mixed list of words some times
