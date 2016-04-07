@@ -12,11 +12,12 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'teacher/css/swal-forms.css' %}">
 
 	<script type="text/javascript">
-		var objs = {{ ex|safe }}; // All students
-		var scores = {{ ex2|safe }} // All scores
+		var objs = {{ ex|safe }};
+		var scores = {{ ex2|safe }}
 		
 		window.onload = function() {
 			document.getElementById("nos").innerHTML = "" + objs.length
+			document.getElementById("tfn").innerHTML = "" + objs.length
 		}
 	</script>
 <style>
@@ -94,38 +95,33 @@
 				formFields: [
 					{ id: 'firstname', placeholder: 'First Name' },
 					{ id: 'lastname', placeholder: 'Last Name' },
-					{ id: 'sid', placeholder: 'Student Identity Number' }
+					{ id: 'username', placeholder: 'Username' },
+					{ id: 'password', placeholder: 'Password' }
 				]
     		}, function(isConfirm) {
 				if (isConfirm) {
 					$.ajax({
-						type: "post",
-						url: "/teacher/addstd/",
-						data: {
-							csrfmiddlewaretoken: '{{ csrf_token }}', 
-							firstname: document.getElementById('firstname').value, 
-							lastname: document.getElementById('lastname').value, 
-							studentid: document.getElementById('sid').value 
-						},
-						success: function(response) {
-							console.log("succeeded")
-						}
+							type: "post",
+							url: "/login/",
+							data: {
+								csrfmiddlewaretoken: '{{ csrf_token }}', 
+								firstname: document.getElementById('firstname').value, <!--Send First Name here.-->
+								lastname: document.getElementById('lastname').value, <!--Send Last Name here.-->
+								username: document.getElementById('username').value, <!--Send Username here.-->
+							    password: document.getElementById('password').value, <!--Send Password here.-->
+								
+								
+							},
+							success: function(response) {
+								// data.redirect contains the string URL to redirect to
+								window.location.href = response
+							}
 					})
 				}
-			}
-		);
+   			});
+		}
 		
-		// Auto-capitalize student's first and last name fields
-		$('#firstname, #lastname').keyup(function(event){
-			var textBox = event.target;
-            var start = textBox.selectionStart;
-            var end = textBox.selectionEnd;
-            textBox.value = textBox.value.charAt(0).toUpperCase() + textBox.value.slice(1);
-            textBox.setSelectionRange(start, end);
-		});
-	}
-		
-	function removeFunct() {
+		function removeFunct() {
 		swal.withForm({
       			title: "Remove Student", 
       			text: "Please Select a Student",
@@ -151,15 +147,14 @@
 							}
 					})
 				}
-   			}
-		);
-	}
+   			});
+		}
 	</script>
 </head>
 <body>
 	<img style="border-width:10px; border-radius:50%; border-style:outset; border-color:#6B8E23; position:absolute; top:-14px; left:-27px;" src="{% static 'teacher/images/teacherimagetest.png' %}"> <!--Teacher Image here.-->
 	<div id="header">
-		Welcome, Teacher! <!--Teacher Name here.-->
+		Welcome, <p id="tfn"></p>
 	</div>
 	<button class="button2">Profile</button>	
 	<br>
