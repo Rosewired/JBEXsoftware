@@ -37,7 +37,6 @@ def teacherLogin(request):
             if user.is_active:
                 if user.groups.filter(name='Teacher').exists():
                     login(request, user)
-                    teacherPageScore(request)
                     return HttpResponse('/teacher/')
                 else:
                     return HttpResponse("You are not a teacher!")
