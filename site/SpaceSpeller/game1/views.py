@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from RandomWordGenerator import *
 import models
 
-@login_required
+#@login_required
 def game(request):
     rand_words = generateRandomWords()
     
