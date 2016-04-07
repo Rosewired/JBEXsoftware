@@ -17,6 +17,7 @@
 		
 		window.onload = function() {
 			document.getElementById("nos").innerHTML = "" + objs.length
+			document.getElementById("tfn").innerHTML = "" + objs.length
 		}
 	</script>
 <style>
@@ -153,7 +154,7 @@
 <body>
 	<img style="border-width:10px; border-radius:50%; border-style:outset; border-color:#6B8E23; position:absolute; top:-14px; left:-27px;" src="{% static 'teacher/images/teacherimagetest.png' %}"> <!--Teacher Image here.-->
 	<div id="header">
-		Welcome, Teacher! <!--Teacher Name here.-->
+		Welcome, <p id="tfn"></p>
 	</div>
 	<button class="button2">Profile</button>	
 	<br>
