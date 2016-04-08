@@ -18,7 +18,7 @@ def studentLogin(request):
                     login(request, user)
                     return HttpResponse('/student/')
                 else:
-                    return HttpResponse('')
+                    return HttpResponse('Not a student.')
             else:
                 return HttpResponse("Inactive user.")
         else:
