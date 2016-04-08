@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.core import serializers
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.http import HttpResponse
 
 import game1.models
@@ -49,9 +49,17 @@ def addStudent(request):
         ln = request.POST['lastname']
         stdid = request.POST['studentid']
 
-        print(fn)
-        print(ln)
-        print(stdid)
-        print(fn[0])
+        # Create login for student
+        username = fn.lower()[0]+ln.lower()
+        user = User.objects.create_user(username, password=fn.lower()[0]+ln.lower()[0]+stdid)
+        user.is_active = True
 
-        return HttpResponse('')
+        # Add new student to student group
+        g = Group.objects.get(name='Student')
+        g.user_set.add(user)
+
+        # Add new student to StudentInfo
+        new_record = game1.models.StudentInfo(idstudent=stdid, firstname=fn, lastname=ln, username=username)
+        new_record.save()
+        
+    return HttpResponse('')

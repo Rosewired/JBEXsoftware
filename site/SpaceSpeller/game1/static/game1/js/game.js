@@ -162,8 +162,6 @@ bubble_pop.PlayGame.prototype = {
 	fire: function() { //Create and fire a bullet
 		//create a new bullet in the bullets group and place it at the ships position
 		var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet');
-        var laser = this.add.audio('laser');
-        laser.play();
 		newBullet.anchor.setTo(0.5,1);
 		newBullet.events.onOutOfBounds.add(this.resetBullet, this);
 
@@ -186,9 +184,7 @@ bubble_pop.PlayGame.prototype = {
 		bul.kill();
 	},
 	collisionHandler: function(bul, ast) { //This removes a bullet and an asteroid that collide.
-		var destory = this.add.audio('destory');
-        destory.play();
-        bul.kill(); //Kill the bullet
+		bul.kill(); //Kill the bullet
 		ast.kill(); //Kill the asteroid that got shot
 		
 		if (!ast.isCorrect){ //If user hits misspelled word, increase score

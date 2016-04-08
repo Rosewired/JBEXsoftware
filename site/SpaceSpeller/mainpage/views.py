@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login, authenticate
 from django.http import HttpResponse
 
 def loadMain(request):
@@ -16,7 +16,7 @@ def studentLogin(request):
             if user.is_active:
                 if user.groups.filter(name='Student').exists():
                     login(request, user)
-                    return HttpResponse('/game/')
+                    return HttpResponse('/student/')
                 else:
                     return HttpResponse("You are not a student!")
             else:
