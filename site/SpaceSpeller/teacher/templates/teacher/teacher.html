@@ -181,6 +181,7 @@
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>Score</th>
+			<th>Date</th>
 		</tr>
 	</table>
 	<script type="text/javascript">
@@ -199,7 +200,14 @@
 				td = $('<td/>');
 				for (var j = 0; j < scores[user].length; j++) {
 					d_date = new Date(scores[user][j][0])
-					td.append(scores[user][j][1] + " on " + d_date + "<br>");					
+					td.append(scores[user][j][1] + "<br>");					
+				}
+				tr.append(td);
+				
+				td = $('<td/>');
+				for (var j = 0; j < scores[user].length; j++) {
+					d_date = new Date(scores[user][j][0])
+					td.append(d_date + "<br>");					
 				}
 				tr.append(td);
 				
