@@ -23,7 +23,6 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 	
 	<script>
-
 		$(function() {
 			$( "#dialog" ).dialog({
 			  autoOpen: false,
@@ -36,28 +35,6 @@
 			$( "#opener" ).click(function() {
 			  $( "#dialog" ).dialog( "open" );
 			});
-		});
-  
-  		$(document).ready(function () {
-			var user;
-			var d_date; 
-			var tr;
-			var td;
-			
-			for (var i = 0; i < objs.length; i++) {
-				tr = $('<tr/>');
-				user = objs[i].fields.username;
-				tr.append("<td>" + objs[i].fields.firstname + "</td>");
-				tr.append("<td>" + objs[i].fields.lastname + "</td>");
-				td = $('<td/>');
-				for (var j = 0; j < scores[user].length; j++) {
-					d_date = new Date(scores[user][j][0])
-					td.append(scores[user][j][1] + " on " + d_date + "<br>");					
-				}
-				tr.append(td);
-				
-				$('table').append(tr);
-			}
 		});
 </script>
  
@@ -189,6 +166,30 @@
 								<th>Score</th>
 							</tr>
 						</table>
+						<script type="text/javascript">
+							// Format the table of scores and populate student's scores
+							$(document).ready(function () {
+								var user;
+								var d_date; 
+								var tr;
+								var td;
+								
+								for (var i = 0; i < objs.length; i++) {
+									tr = $('<tr/>');
+									user = objs[i].fields.username;
+									tr.append("<td>" + objs[i].fields.firstname + "</td>");
+									tr.append("<td>" + objs[i].fields.lastname + "</td>");
+									td = $('<td/>');
+									for (var j = 0; j < scores[user].length; j++) {
+										d_date = new Date(scores[user][j][0])
+										td.append(scores[user][j][1] + " on " + d_date + "<br>");					
+									}
+									tr.append(td);
+									
+									$('table').append(tr);
+								}
+							});
+						</script>
 					</p>
 				</div>
  		 		<div class ="button2">
