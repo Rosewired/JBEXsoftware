@@ -13,11 +13,12 @@
 
 	<script type="text/javascript">
 		var objs = {{ ex|safe }}; // All students
-		var scores = {{ ex2|safe }} // All scores
+		var scores = {{ ex2|safe }}; // All scores
+		var tname = {{ tfn|safe }};
 		
 		window.onload = function() {
 			document.getElementById("nos").innerHTML = "" + objs.length // Get total number of students
-			document.getElementById("tfn").innerHTML = "" + objs.length // Get teacher's first name
+			document.getElementById("tfn").innerHTML = "Welcome, " + tname // Get teacher's first name
 		}
 	</script>
 <style>
@@ -160,7 +161,7 @@
 <body>
 	<img style="border-width:10px; border-radius:50%; border-style:outset; border-color:#6B8E23; position:absolute; top:-14px; left:-27px;" src="{% static 'teacher/images/teacherimagetest.png' %}"> <!--Teacher Image here.-->
 	<div id="header">
-		Welcome, <p id="tfn"></p> <!-- Teacher's name -->
+		<p id="tfn"></p> <!-- Teacher's name -->
 	</div>
 	<button class="button2">Profile</button>	
 	<br>

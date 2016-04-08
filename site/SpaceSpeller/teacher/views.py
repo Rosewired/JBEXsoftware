@@ -29,7 +29,7 @@ def teacherPage(request):
     data = serializers.serialize("json", std)
     score_list = json.dumps(test)
 
-    return render(request, 'teacher/teacher.html', {'ex': data, 'ex2': score_list})
+    return render(request, 'teacher/teacher.html', {'ex': data, 'ex2': score_list, 'tfn': json.dumps(request.user.username)})
 
 
 """JSON serializer for objects not serializable by default json code"""
