@@ -42,6 +42,9 @@ def json_serial(obj):
 """
 Create a student login
 Add student infomation to database
+
+Username: first name initial and last name
+Password: first and last name initial + student id
 """
 def addStudent(request):
     if request.method == "POST":
@@ -62,4 +65,18 @@ def addStudent(request):
         new_record = game1.models.StudentInfo(idstudent=stdid, firstname=fn, lastname=ln, username=username)
         new_record.save()
         
+    return HttpResponse('')
+
+def removeStudent(request):
+    if request.method == "POST":
+        studentid = request.POST['sid']
+
+        user = game1.models.StudentInfo.objects.get(idstudent=studentid)
+
+        game1.models.ScoreInfo.objects.filter(student_id=user).delete()
+        game1.models.StudentInfo.objects.get(idstudent=studentid).delete() 
+            
+        User.objects.get(username=user.username).delete()
+
+
     return HttpResponse('')
