@@ -61,7 +61,7 @@
                     //Add new asteroids every second until 10 new asteroids have been added. This is to space the asteroids out so they don't clump together
                     var cThis = this;
                     console.log(cThis);
-                    this.game.time.events.repeat(Phaser.Timer.SECOND * 3, 10,this.newAsteroid, cThis);
+                    this.game.time.events.repeat(Phaser.Timer.SECOND * 10, 10,this.newAsteroid, cThis);
                   
 
                     //Player
@@ -80,6 +80,7 @@
                     key2.onDown.add(this.fire, this);
 
                     score_text = this.game.add.text(this.game.world.width/2, 5, 'Score: 0', { fontSize: '24px', fill: '#FFF' });
+                    score_text.anchor.x = .5;
 
                     //Add pause button to top left corner
                     //why does saying 'this.pauseMenu' not work
@@ -97,7 +98,9 @@
                     oldDif = difficulty;//Save the currently difficulty. We will check it later to see if the difficulty changed
                     
                     var style = { font: "28px Arial", fill: "#ffffff", align: "center",};
-                    pausedText = this.add.text(250, 260, "Game paused.\nTap anywhere to continue.", style);     
+                    pausedText = this.add.text(this.game.width/2, this.game.height/2, "Game paused.\nTap anywhere to continue.", style);     
+                    pausedText.anchor.x =.5;
+                    pausedText.anchor.y =.5;
                                                     
                     aniTest = this.game.add.sprite(3*this.game.width/8,5*this.game.height/8,'difficultyAnim');
                     aniTest.scale.x = .3;
