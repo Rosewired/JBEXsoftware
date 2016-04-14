@@ -1,7 +1,7 @@
 var bubble_pop = bubble_pop || {};
 
 //This is what starts the game by making a new Phaser game object
-bubble_pop.game = new Phaser.Game(800, 600, Phaser.AUTO, '');
+bubble_pop.game = new Phaser.Game($(document).width()*.9, $(document).height()*.9, Phaser.AUTO, '');
 
 //Declare variables
 var eSprite;
