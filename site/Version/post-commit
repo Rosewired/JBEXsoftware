@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+#
+# This script logs the version number to version.json.
+# It runs after a commit is executed
+
+import sys, datetime, json, os.path
+from subprocess import call, check_output
+
+#first check for .commit file to avoid looping
+if os.path.isfile('.commit'):
+
+	version_path = "./site/Version/version.json"
+
+	branch = check_output('git rev-parse --abbrev-ref HEAD').rstrip() #get branch
+	commit_count = check_output('git rev-list --count HEAD').rstrip() #get commit count
+	commit_hash = check_output('git rev-parse --short HEAD').rstrip() #get commit hash
+		
+	#check if file exists
+	if not os.path.isfile(version_path):
+		#if not, create it
+		with open(version_path, 'w+') as version_file:
+			version_dict = {"version-number": "0.2"} #default version number
+			json.dump(version_dict, version_file)
+
+	#check if file is empty
+	with open(version_path, 'r+') as version_file:
+		if version_file.read() == "":
+			version_file.seek(0)
+			version_file.truncate()
+			version_dict = {"version-number": "0.2"} #default version number
+			json.dump(version_dict, version_file)
+
+	#now perform version update
+	with open(version_path, 'r+') as version_file:
+		version_data = version_file.read() #read version file to a string
+		version_dict = json.loads(version_data) #turn string into python dictionary
+		version_number = version_dict['version-number'] #get version number from dictionary
+		
+		version = version_number + '.' + str(int(commit_count)/100) + '.' + str(int(commit_count)%100) + branch[0] #construct version string
+		
+		version_dict['version-string'] = version #save version string back to dictionary
+		
+		#rewind and clear the file to enable overwriting it
+		version_file.seek(0)
+		version_file.truncate()
+		
+		json.dump(version_dict, version_file) #write new version back to data file
+		
+	#remove .commit file
+	os.remove('.commit')
+
+	call('git add -u') #stage updated files
+	call('git commit -C HEAD --amend --no-verify') #amend the commit to include the new data
+	call('git notes add -m "Version ' + version + '" HEAD') #add commit note specifying version
+
+	print "--Version updated to " + version + "--"
+
