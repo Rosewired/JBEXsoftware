@@ -1,6 +1,5 @@
 {% load staticfiles %}
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,12 +12,23 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'mainpage/css/swal-forms.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'mainpage/css/front-page.css' %}">
 	
+	<script>
+		window.onload = function() {
+			$.getJSON("/main/version/", function(data) {
+				document.getElementById("version").innerHTML = "Version: " + data;
+			})
+		}
+	</script>
+	
 	<style>
 		margin:auto;
 	</style>
 </head>
 
 <body background="{% static 'mainpage/images/background.jpg' %}">
+	<script>
+		
+	</script>
 	<script>
 		function aboutFunct() {
 			swal({
@@ -94,5 +104,8 @@
 		<input type="image" src="{% static 'mainpage/images/students.png' %}" style="position:absolute;top:75px;left:900px" onClick="studentFunct();">
 		<input type="image" src="{% static 'mainpage/images/teachers.png' %}" style="position:absolute;top:350px;left:125px" onClick="teacherFunct();">
 	</div>
+	<div id="bottomPage">
+        <h3 id="version"></h3>
+    </div>
 </body>
 </html>
