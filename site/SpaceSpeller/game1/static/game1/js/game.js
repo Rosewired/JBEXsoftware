@@ -6,9 +6,12 @@
         
             create: function() {
                     //Restart the score
+                    
+                    var gameRef = this;
                     score = 0;
                     
-                     
+                    spaceSpellerBackground = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "starField");
+                    
                     //This sets how the game handles collisions, etc.
                     this.game.physics.startSystem(Phaser.Physics.ARCADE);
                     this.game.input.enabled = true;
@@ -89,6 +92,7 @@
                     
                     
                     var aniTest;//The sprite representing current difficulty
+                    var quitButton;
                     var oldDif;
                 
                     //Called once when the game is paused.
@@ -102,11 +106,18 @@
                     pausedText.anchor.x =.5;
                     pausedText.anchor.y =.5;
                                                     
-                    aniTest = this.game.add.sprite(3*this.game.width/8,5*this.game.height/8,'difficultyAnim');
+                    aniTest = this.game.add.sprite(3.5*this.game.width/8,5*this.game.height/8,'difficultyAnim');
                     aniTest.scale.x = .3;
                     aniTest.scale.y = .3;
-                    aniTest.anchor.x =.5;
+                    aniTest.anchor.x =.48;
                     aniTest.anchor.y = .5;
+                        
+                    quitButton = this.game.add.sprite(4.5*this.game.width/8,5*this.game.height/8,'quit');
+                    quitButton.scale.x = .3;
+                    quitButton.scale.y = .3;
+                    quitButton.anchor.x =.52;
+                    quitButton.anchor.y = .5;
+                    
                  
                     aniTest.animations.frame = (difficulty);//display the current difficulty level
                     
@@ -127,10 +138,15 @@
                             difficulty = (difficulty+1)%4;
                             aniTest.animations.frame = (difficulty);   
                         }
+                        else if(event.x < quitButton.position.x+quitButton.width/2 && event.x > quitButton.position.x-quitButton.width/2 && event.y < quitButton.position.y + quitButton.height/2 && event.y > quitButton.position.y - quitButton.height/2)
+                        {
+                            window.location = '/student';
+                        }
                         else//We didn't click the adjust-difficulty button so unpause
                         {
                             pausedText.destroy();
                             aniTest.destroy();
+                            quitButton.destroy();
                             this.game.paused = false;
                             
                             if(oldDif !== difficulty)//Also make the asteroid move according to the new speed if it is different than the old speed
@@ -143,6 +159,8 @@
                     
             },
             update: function() {
+                
+                spaceSpellerBackground.tilePosition.x += .2;
                     //Handle overlaps between members of the asteroids and bullets groups. It calls the collisionHandler method.
                     this.game.physics.arcade.collide(bullets, asteroids, this.collisionHandler, null, this);
 
