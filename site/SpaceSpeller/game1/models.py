@@ -8,6 +8,7 @@ class StudentInfo(models.Model):
     firstname = models.TextField()  
     lastname = models.TextField()
     username = models.TextField(max_length=45, blank=True, null=True)
+    grade = models.IntegerField(null=False,default=1)
 
 class ScoreInfo(models.Model):
     recordtime = models.DateTimeField(default=timezone.now, primary_key=True)  #timestamp at creation

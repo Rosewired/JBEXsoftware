@@ -62,7 +62,7 @@ def scrambleSingleVowel(word):
                 
             newVowel = vList[pos][1][random.randrange(len(vList[pos][1]))]
 
-            print str(newWord) + " |",
+#            print str(newWord) + " |",
             
             newWord = str(word[:index]) + str(newVowel) + str(word[index + 1:])
             
@@ -92,7 +92,7 @@ def scrambleDoubleVowel(word):
                 
             newVowel = doubleVList[pos][1][random.randrange(len(doubleVList[pos][1]))]
 
-            print str(newWord) + " |",
+  #          print str(newWord) + " |",
             
             newWord = str(word[:index]) + str(newVowel) + str(word[index + 2:])
             
@@ -150,7 +150,7 @@ def generateMisspelledWord(word):
     global doubleVowel
     
     word = word.lower()
-    print "_______________________"
+ #   print "_______________________"
     
     '''Various datastructures required for method'''
     
@@ -195,7 +195,7 @@ def generateMisspelledWord(word):
     We now scan the word for vowels, consonants and any double letters as well as vowel pairs.
     These are all recorded in our datastructures for use later
     '''
-    print word
+ #   print word
     for i in xrange(0, len(word) - 1):
            
         #Check for vowel
@@ -273,9 +273,21 @@ print (time.time()*1000-millis)
 '''
 
     
-def generateRandomWords():
-    l = list(models.Words1.objects.all().values_list("word",flat=True))
+def generateRandomWords(grade):
+    if(grade == 1):
+	    l = list(models.Words1.objects.all().values_list("word",flat=True))
+    elif(grade == 2):
+	    l = list(models.Words2.objects.all().values_list("word",flat=True))
+    elif(grade == 3):
+	    l = list(models.Words3.objects.all().values_list("word",flat=True))
+
+    elif(grade == 4):
+	    l = list(models.Words4.objects.all().values_list("word",flat=True))
+    elif(grade == 5):
+	    l = list(models.Words5.objects.all().values_list("word",flat=True))
+
     random_list = []
+
 
     #Shuffle the original list of words some times
     for i in range(5):
