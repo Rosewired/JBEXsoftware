@@ -11,6 +11,8 @@ bubble_pop.Preload.prototype = {
 		this.load.image('bullet',STATIC_URL+'images/bullet.png');
 		this.load.image('asteroid',STATIC_URL+'images/asteroid.png');
                 this.load.image('difficulty',STATIC_URL+'images/difficultyAnim.png');
+                this.load.image('starField', STATIC_URL+'images/starField.png');
+                this.load.image('quit', STATIC_URL+'images/quit.png');
                 this.load.spritesheet('difficultyAnim', STATIC_URL+'images/difficultyAnim.png',1360/4,216);
 		this.load.spritesheet('pause_button', STATIC_URL+'images/pause.png', 30, 30);
         this.load.audio('game1',STATIC_URL+'music/game1.mp3');
