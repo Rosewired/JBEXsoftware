@@ -276,15 +276,25 @@ print (time.time()*1000-millis)
 def generateRandomWords(grade):
     if(grade == 1):
 	    l = list(models.Words1.objects.all().values_list("word",flat=True))
+	    print(5)
+	    print(grade)
     elif(grade == 2):
 	    l = list(models.Words2.objects.all().values_list("word",flat=True))
+	    print(2)
+	    print(grade)
     elif(grade == 3):
 	    l = list(models.Words3.objects.all().values_list("word",flat=True))
+	    print(3)
+	    print(grade)
 
     elif(grade == 4):
 	    l = list(models.Words4.objects.all().values_list("word",flat=True))
+	    print(4)
+	    print(grade)
     elif(grade == 5):
 	    l = list(models.Words5.objects.all().values_list("word",flat=True))
+	    print(5)
+	    print(grade)
 
     random_list = []
 
