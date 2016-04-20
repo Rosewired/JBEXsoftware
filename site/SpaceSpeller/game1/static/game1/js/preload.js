@@ -8,8 +8,19 @@ bubble_pop.Preload.prototype = {
 		this.game.scale.refresh();
 		
 		this.load.image('ship',STATIC_URL+'images/ship.png');
+        this.load.image('ship1',STATIC_URL+'images/ship1.png');
+        this.load.image('shipButton',STATIC_URL+'images/ship.png');
+        this.load.image('shipButton1',STATIC_URL+'images/ship1.png');
 		this.load.image('bullet',STATIC_URL+'images/bullet.png');
+        this.load.image('bullet2',STATIC_URL+'images/bullet2.png');
 		this.load.image('asteroid',STATIC_URL+'images/asteroid.png');
+        this.load.image('asteroid1',STATIC_URL+'images/asteroid1.png');
+        this.load.image('map',STATIC_URL+'images/map.jpg');
+        this.load.image('map2',STATIC_URL+'images/map2.jpg');
+        this.load.image('map3',STATIC_URL+'images/map3.jpg');
+        this.load.image('mapButton1',STATIC_URL+'images/mapButton1.jpg');
+        this.load.image('mapButton2',STATIC_URL+'images/mapButton2.jpg');
+        this.load.image('mapButton3',STATIC_URL+'images/mapButton3.jpg');
                 this.load.image('difficulty',STATIC_URL+'images/difficultyAnim.png');
                 this.load.image('starField', STATIC_URL+'images/starField.png');
                 this.load.image('quit', STATIC_URL+'images/quit.png');

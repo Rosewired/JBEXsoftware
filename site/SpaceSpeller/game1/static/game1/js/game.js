@@ -6,11 +6,23 @@
         
             create: function() {
                     //Restart the score
-                    
+                    if(x == 1){
+       
+        background = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "map");
+        }
+        else if(x == 2){
+       
+        //background = this.game.add.sprite(0, 0, 'map2');
+        background = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "map2");
+        }
+         else if(x == 3){
+      
+        background = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "map3");
+        }
                     var gameRef = this;
                     score = 0;
                     
-                    spaceSpellerBackground = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "starField");
+                    //spaceSpellerBackground = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "starField");
                     
                     //This sets how the game handles collisions, etc.
                     this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -68,7 +80,12 @@
                   
 
                     //Player
-                    eSprite = this.game.add.sprite(this.game.width/2,this.game.height/2,'ship');
+                    if(y == 1){
+		  eSprite = this.game.add.sprite(100,100,'ship');
+        }
+        else if(y == 2){
+             eSprite = this.game.add.sprite(100,100,'ship1');
+        }
                     this.game.physics.arcade.enable(eSprite);
                     eSprite.body.gravity.y = 0;
                     eSprite.body.gravity.x = 0;
@@ -160,7 +177,7 @@
             },
             update: function() {
                 
-                spaceSpellerBackground.tilePosition.x += .2;
+               background.tilePosition.x += .2;
                     //Handle overlaps between members of the asteroids and bullets groups. It calls the collisionHandler method.
                     this.game.physics.arcade.collide(bullets, asteroids, this.collisionHandler, null, this);
 
@@ -262,7 +279,12 @@
            fire: function() { //Create and fire a bullet
                     //create a new bullet in the bullets group and place it at the ships position
                     
-                    var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet');
+                    if(y == 1){
+		var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet');
+        }
+        else if(y == 2){
+        var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet2');
+        }
                     var laser = this.add.audio('laser');
                     laser.play();
                     newBullet.anchor.setTo(0.5,1);
@@ -333,8 +355,13 @@
             
             newAsteroid: function()
             {
-                var ast = asteroids.create(10, this.game.world.randomY, 'asteroid');
-
+               
+ if(x == 3){
+			var ast = asteroids.create(10, this.game.world.randomY, 'asteroid1');
+            }
+            else{
+             var ast = asteroids.create(10, this.game.world.randomY, 'asteroid');  
+            }
                     ast.anchor.x =.5;
                     ast.anchor.y =.5;
                    
