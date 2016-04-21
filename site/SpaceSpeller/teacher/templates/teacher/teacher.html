@@ -116,7 +116,7 @@
 							studentid: document.getElementById('sid').value 
 						},
 						success: function(response) {
-							console.log("succeeded")
+							console.log("succeeded");
 						}
 					})
 				}
@@ -132,46 +132,6 @@
             textBox.setSelectionRange(start, end);
 		});
 	}
-		
-	/*
-	function removeFunct() {
-		var std_name = [];
-		var i;
-		
-		for (i = 0; i < objs.length; i++) {
-			std_name.push(objs[i].fields.firstname + " " + objs[i].fields.lastname);
-		}
-	
-		swal.withForm({
-      			title: "Remove Student", 
-      			text: "Please Select a Student",
-      			showCancelButton: true,
-     			closeOnConfirm: true,
-     			formFields: [
-					{ id: 'select', type: 'select', options: [ <!--Populate with student names here.-->
-          				{value: 'remove', text: std_name[0]},
-						{value: 'remove', text: 'Jim Student'}
-      				]}
-      			]
-    		}, function(isConfirm) {
-				if (isConfirm) {
-					$.ajax({
-							type: "post",
-							url: "/login/",
-							data: {
-								csrfmiddlewaretoken: '{{ csrf_token }}', 
-								remove: document.getElementById('remove').value <!--Send selection here.-->
-							},
-							success: function(response) {
-								// data.redirect contains the string URL to redirect to
-								window.location.href = response
-							}
-					})
-				}
-   			}
-		);
-	}
-	*/
 	</script>
 </head>
 <body>
@@ -179,7 +139,24 @@
 	<div id="header">
 		<p id="tfn"></p> <!-- Teacher's name -->
 	</div>
-	<button class="button2">Log Out</button>	
+	<button id="logout_btn" class="button2">Log Out</button>
+	<script>
+		$('#logout_btn').click(function() {    
+			$.ajax({
+				type: "post",
+				url: "/teacher/logout/",
+				data: {
+					csrfmiddlewaretoken: '{{ csrf_token }}',
+					click: false
+				},
+				success: function (response) {        
+					console.log("logged out");
+					window.location.href = response;	
+				}
+			});
+		});
+	</script>
+});
 	<br>
 	<br>
 	<center>
