@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+#
+# This git hook simply detects new commits and passes the result to post-commit to avoid looping
+#
+
+open('.commit', 'w+')
