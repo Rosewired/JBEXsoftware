@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponse
 
+import json
+
 def loadMain(request):
     return render(request, 'mainpage/main.html')
 
@@ -47,3 +49,15 @@ def teacherLogin(request):
 
     return render(request, "index/login.html", {'redirect_to': next})
 
+"""
+Get current version of the project
+"""
+def getVersion(request):
+    version_path = './mainpage/static/mainpage/others/version.json'
+    
+    with open(version_path, 'r+') as version_file:
+	version_data = version_file.read() #read version file to a string
+	version_dict = json.loads(version_data) #turn string into python dictionary
+	version = version_dict['version-string'] #get version number from dictionary
+		
+    return HttpResponse(json.dumps(version), content_type='application/json')

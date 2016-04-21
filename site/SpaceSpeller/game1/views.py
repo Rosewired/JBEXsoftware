@@ -6,8 +6,11 @@ import models
 
 @login_required
 def game(request):
-    rand_words = generateRandomWords()
-    
+    user = request.user.username
+    l = models.StudentInfo.objects.get(username=user)
+    print(l.grade)
+    print(l.grade == 1)
+    rand_words = generateRandomWords(l.grade)
     return render(request, 'game1/game.html', {'value':rand_words})
 
 def updateScore(request):

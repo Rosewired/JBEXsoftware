@@ -9,7 +9,7 @@ from subprocess import call, check_output
 #first check for .commit file to avoid looping
 if os.path.isfile('.commit'):
 
-	version_path = "./site/Version/version.json"
+	version_path = "./site/SpaceSpeller/mainpage/static/mainpage/others/version.json"
 
 	branch = check_output('git rev-parse --abbrev-ref HEAD').rstrip() #get branch
 	commit_count = check_output('git rev-list --count HEAD').rstrip() #get commit count

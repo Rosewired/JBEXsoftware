@@ -29,6 +29,7 @@ def addStudent(request):
         fn = request.POST['firstname']
         ln = request.POST['lastname']
         stdid = request.POST['studentid']
+        grade = request.POST['grade']
 
         # Create login for student
         username = fn.lower()[0]+ln.lower()
@@ -40,7 +41,7 @@ def addStudent(request):
         g.user_set.add(user)
 
         # Add new student to StudentInfo
-        new_record = game1.models.StudentInfo(idstudent=stdid, firstname=fn, lastname=ln, username=username)
+        new_record = game1.models.StudentInfo(idstudent=stdid, firstname=fn, lastname=ln, username=username,grade=grade)
         new_record.save()
         
     return HttpResponse('')

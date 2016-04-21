@@ -100,6 +100,7 @@
 				formFields: [
 					{ id: 'firstname', placeholder: 'First Name' },
 					{ id: 'lastname', placeholder: 'Last Name' },
+					{ id: 'grade', placeholder: 'Grade' },
 					{ id: 'sid', placeholder: 'Student Identity Number' }
 				]
     		}, function(isConfirm) {
@@ -111,6 +112,7 @@
 							csrfmiddlewaretoken: '{{ csrf_token }}', 
 							firstname: document.getElementById('firstname').value, 
 							lastname: document.getElementById('lastname').value, 
+							grade: document.getElementById('grade').value, 
 							studentid: document.getElementById('sid').value 
 						},
 						success: function(response) {
@@ -196,6 +198,7 @@
 			<th>Last Name</th>
 			<th>Score</th>
 			<th>Date</th>
+                        <th>Grade</th>
 		</tr>
 	</table>
 	<script type="text/javascript">
@@ -225,6 +228,8 @@
 				}
 				tr.append(td);
 				
+                                tr.append("<td>" + objs[i].fields.grade + "</td>");
+                                
 				$('table').append(tr);
 			}
 		});

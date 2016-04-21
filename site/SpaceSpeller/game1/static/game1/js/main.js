@@ -18,7 +18,9 @@ var rand;
 var p_button; //pause button
 var score = 0; //user's score
 var score_text; //display score
-
+var spaceSpellerBackground;
+var x = 1;
+var y = 1;
 
 bubble_pop.game.state.add('Preload', bubble_pop.Preload);
 bubble_pop.game.state.add('MainMenu', bubble_pop.MainMenu);

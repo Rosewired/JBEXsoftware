@@ -6,9 +6,24 @@
         
             create: function() {
                     //Restart the score
+                    if(x == 1){
+       
+        background = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "map");
+        }
+        else if(x == 2){
+       
+        //background = this.game.add.sprite(0, 0, 'map2');
+        background = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "map2");
+        }
+         else if(x == 3){
+      
+        background = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "map3");
+        }
+                    var gameRef = this;
                     score = 0;
                     
-                     
+                    //spaceSpellerBackground = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "starField");
+                    
                     //This sets how the game handles collisions, etc.
                     this.game.physics.startSystem(Phaser.Physics.ARCADE);
                     this.game.input.enabled = true;
@@ -61,11 +76,16 @@
                     //Add new asteroids every second until 10 new asteroids have been added. This is to space the asteroids out so they don't clump together
                     var cThis = this;
                     console.log(cThis);
-                    this.game.time.events.repeat(Phaser.Timer.SECOND * 3, 10,this.newAsteroid, cThis);
+                    this.game.time.events.repeat(Phaser.Timer.SECOND * 10, 10,this.newAsteroid, cThis);
                   
 
                     //Player
-                    eSprite = this.game.add.sprite(this.game.width/2,this.game.height/2,'ship');
+                    if(y == 1){
+		  eSprite = this.game.add.sprite(100,100,'ship');
+        }
+        else if(y == 2){
+             eSprite = this.game.add.sprite(100,100,'ship1');
+        }
                     this.game.physics.arcade.enable(eSprite);
                     eSprite.body.gravity.y = 0;
                     eSprite.body.gravity.x = 0;
@@ -80,6 +100,7 @@
                     key2.onDown.add(this.fire, this);
 
                     score_text = this.game.add.text(this.game.world.width/2, 5, 'Score: 0', { fontSize: '24px', fill: '#FFF' });
+                    score_text.anchor.x = .5;
 
                     //Add pause button to top left corner
                     //why does saying 'this.pauseMenu' not work
@@ -88,6 +109,7 @@
                     
                     
                     var aniTest;//The sprite representing current difficulty
+                    var quitButton;
                     var oldDif;
                 
                     //Called once when the game is paused.
@@ -97,13 +119,22 @@
                     oldDif = difficulty;//Save the currently difficulty. We will check it later to see if the difficulty changed
                     
                     var style = { font: "28px Arial", fill: "#ffffff", align: "center",};
-                    pausedText = this.add.text(250, 260, "Game paused.\nTap anywhere to continue.", style);     
+                    pausedText = this.add.text(this.game.width/2, this.game.height/2, "Game paused.\nTap anywhere to continue.", style);     
+                    pausedText.anchor.x =.5;
+                    pausedText.anchor.y =.5;
                                                     
-                    aniTest = this.game.add.sprite(3*this.game.width/8,5*this.game.height/8,'difficultyAnim');
+                    aniTest = this.game.add.sprite(3.5*this.game.width/8,5*this.game.height/8,'difficultyAnim');
                     aniTest.scale.x = .3;
                     aniTest.scale.y = .3;
-                    aniTest.anchor.x =.5;
+                    aniTest.anchor.x =.48;
                     aniTest.anchor.y = .5;
+                        
+                    quitButton = this.game.add.sprite(4.5*this.game.width/8,5*this.game.height/8,'quit');
+                    quitButton.scale.x = .3;
+                    quitButton.scale.y = .3;
+                    quitButton.anchor.x =.52;
+                    quitButton.anchor.y = .5;
+                    
                  
                     aniTest.animations.frame = (difficulty);//display the current difficulty level
                     
@@ -124,10 +155,15 @@
                             difficulty = (difficulty+1)%4;
                             aniTest.animations.frame = (difficulty);   
                         }
+                        else if(event.x < quitButton.position.x+quitButton.width/2 && event.x > quitButton.position.x-quitButton.width/2 && event.y < quitButton.position.y + quitButton.height/2 && event.y > quitButton.position.y - quitButton.height/2)
+                        {
+                            window.location = '/student';
+                        }
                         else//We didn't click the adjust-difficulty button so unpause
                         {
                             pausedText.destroy();
                             aniTest.destroy();
+                            quitButton.destroy();
                             this.game.paused = false;
                             
                             if(oldDif !== difficulty)//Also make the asteroid move according to the new speed if it is different than the old speed
@@ -140,6 +176,8 @@
                     
             },
             update: function() {
+                
+               background.tilePosition.x += .2;
                     //Handle overlaps between members of the asteroids and bullets groups. It calls the collisionHandler method.
                     this.game.physics.arcade.collide(bullets, asteroids, this.collisionHandler, null, this);
 
@@ -240,7 +278,15 @@
             },
            fire: function() { //Create and fire a bullet
                     //create a new bullet in the bullets group and place it at the ships position
-                    var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet');
+                    
+                    if(y == 1){
+		var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet');
+        }
+        else if(y == 2){
+        var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet2');
+        }
+                    var laser = this.add.audio('laser');
+                    laser.play();
                     newBullet.anchor.setTo(0.5,1);
                     newBullet.events.onOutOfBounds.add(this.resetBullet, this);
 
@@ -281,6 +327,8 @@
                     bul.kill();
             },
             collisionHandler: function(bul, ast) { //This removes a bullet and an asteroid that collide.
+                    var destory = this.add.audio('destory');
+                    destory.play();
                     bul.kill(); //Kill the bullet
                     ast.kill(); //Kill the asteroid that got shot
                     currAsteroids--;
@@ -307,8 +355,13 @@
             
             newAsteroid: function()
             {
-                var ast = asteroids.create(10, this.game.world.randomY, 'asteroid');
-
+               
+ if(x == 3){
+			var ast = asteroids.create(10, this.game.world.randomY, 'asteroid1');
+            }
+            else{
+             var ast = asteroids.create(10, this.game.world.randomY, 'asteroid');  
+            }
                     ast.anchor.x =.5;
                     ast.anchor.y =.5;
                    

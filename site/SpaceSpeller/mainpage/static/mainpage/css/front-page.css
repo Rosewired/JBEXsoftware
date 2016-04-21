@@ -8,3 +8,12 @@
 	width: 80%;
 	height: 90%;
 }
+#bottomPage {
+	position: fixed;
+    bottom: 20px;
+    width: 100%;
+    right: 20px;
+    height: 25px;
+	color: #ffffff;
+	text-align: right;
+}
