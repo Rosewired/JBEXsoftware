@@ -33,6 +33,9 @@
                     bullets.enableBody = true;
                     bullets.physicsBodyType = Phaser.Physics.ARCADE;
 
+                    //Group of words
+                    fadeWords = this.game.add.group();
+
                     //Holds the three sprites showing how many lives the user has left
                     lives = []
                     lives[0] = this.game.add.sprite(10,10,'ship');
@@ -270,11 +273,20 @@
 
 
 
-                }               
-
+                }
+                
+                for(var i = 0; i < fadeWords.children.length; i ++) {
+                    if(fadeWords.children[i].alpha === 0)
+                    {
+                        fadeWords.children[i].destroy();
+                    }
+                    else
+                    {
+                        fadeWords.children[i].alpha-=.01;
+                    } 
                     
-
-
+                        
+                }
             },
            fire: function() { //Create and fire a bullet
                     //create a new bullet in the bullets group and place it at the ships position
@@ -335,7 +347,7 @@
                     if (!ast.isCorrect){ //If user hits misspelled word, increase score
                             score+=1; 
                     score_text.text = "Score: " + score;
-            text = this.game.add.text(ast.x, ast.y, words[ast.number][2], { font: "16px Arial", fill: "#ffffff", wordWrap: true, align: "center", backgroundColor: "" });
+            text = this.game.add.text(ast.x, ast.y, words[ast.number][2], { font: "16px Arial", fill: "#ffffff", wordWrap: true, align: "center", backgroundColor: "" },fadeWords);
 
             }
             else
@@ -371,6 +383,7 @@
                 var rand_num = this.game.rnd.integerInRange(0, words.length-1); //Get a random index from 'words'
 
                 text = this.game.add.text(0, 0, words[rand_num][0], { font: "16px Arial", fill: "#ffffff", wordWrap: true, align: "center", backgroundColor: "" });
+                            
                 text.anchor.set(0.5);
                 ast.text = ast.addChild(text); //Attach word to sprite
 

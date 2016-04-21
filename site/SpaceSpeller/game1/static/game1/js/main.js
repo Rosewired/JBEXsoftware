@@ -9,6 +9,7 @@ var asteroid;
 var asteroids;
 var bullet;
 var bullets;
+var fadeWords;
 var cursors;
 var key2;
 var key1;
