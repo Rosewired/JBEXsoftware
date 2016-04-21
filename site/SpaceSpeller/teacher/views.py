@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth import logout
 from datetime import datetime
 from django.core import serializers
 from django.contrib.auth.models import User, Group
@@ -95,3 +96,11 @@ def teacherPage(request):
     score_list = json.dumps(test)
 
     return render(request, 'teacher/teacher.html', {'ex': data, 'ex2': score_list, 'tfn': json.dumps(request.user.username)})
+
+
+def teacherLogout(request):
+    if request.POST.get('click', False):
+        logout(request)
+        return HttpResponse('/main/')
+
+    teacherPage(request)
