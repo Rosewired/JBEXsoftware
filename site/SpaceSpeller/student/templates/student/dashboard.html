@@ -47,6 +47,11 @@
  	 	margin:0 auto;
  	 	width:110px;
  	}
+ 	
+ 	.button3 {
+ 		margin:0 auto;
+ 		width: 1170px;
+ 	}
 	.classname {
 		z-index:3;
 		-moz-box-shadow:inset 0px 1px 0px 0px #fce2c1;
@@ -139,6 +144,52 @@
 		position:relative;
 		top:1px;
 	}
+	.classname3 {
+		z-index:3;
+		-moz-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+		-webkit-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+		box-shadow:inset 0px 1px 0px 0px #fce2c1;
+		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #5c5a57) );
+		background:-moz-linear-gradient( center top, #ffffff 5%, #5c5a57 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#5c5a57');
+		background-color:#ffffff;
+		-webkit-border-top-left-radius:20px;
+		-moz-border-radius-topleft:20px;
+		border-top-left-radius:20px;
+		-webkit-border-top-right-radius:20px;
+		-moz-border-radius-topright:20px;
+		border-top-right-radius:20px;
+		-webkit-border-bottom-right-radius:20px;
+		-moz-border-radius-bottomright:20px;
+		border-bottom-right-radius:20px;
+		-webkit-border-bottom-left-radius:20px;
+		-moz-border-radius-bottomleft:20px;
+		border-bottom-left-radius:20px;
+		text-indent:0;
+		border:1px solid #ffffff;
+		display:inline-block;
+		color:#1d34cc;
+		font-family:Arial Black;
+		font-size:15px;
+		font-weight:bold;
+		font-style:italic;
+		height:30px;
+		line-height:25px;
+		width:90px;
+		text-decoration:none;
+		text-align:center;
+		text-shadow:1px 1px 0px #cc9f52;
+	}
+	.classname3:hover {
+		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5c5a57), color-stop(1, #ffffff) );
+		background:-moz-linear-gradient( center top, #5c5a57 5%, #ffffff 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5c5a57', endColorstr='#ffffff');
+		background-color:#5c5a57;
+	}
+	.classname3:active {
+		position:relative;
+		top:1px;
+	}
  </style> 
  </head>
  <body style="background-color:black;"> 
@@ -205,6 +256,10 @@
 		
  		<div class ="button2">
 			<button id="score_btn" class="classname2" style="top:78px; position:absolute">Scores</button>
+ 		</div>
+ 		
+ 		<div class ="button3">
+ 			<button id="logout" class ="classname3" style="top:23px; position:absolute">Log Out</button>
  		</div>
  	</div> 
  </body> 
