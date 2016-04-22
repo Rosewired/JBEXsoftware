@@ -3,26 +3,19 @@
     bubble_pop.PlayGame = function() {}
 
     bubble_pop.PlayGame.prototype = {
-        
+            init: function(shipSprite,backgroundImage)
+            {
+                bubble_pop.PlayGame.prototype.ship = shipSprite;
+                bubble_pop.PlayGame.prototype.bacground = backgroundImage;
+                
+            },
             create: function() {
-                    //Restart the score
-                    if(x == 1){
-       
-        background = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "map");
-        }
-        else if(x == 2){
-       
-        //background = this.game.add.sprite(0, 0, 'map2');
-        background = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "map2");
-        }
-         else if(x == 3){
-      
-        background = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "map3");
-        }
-                    var gameRef = this;
-                    score = 0;
                     
-                    //spaceSpellerBackground = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "starField");
+                    //Choose which background to use
+                    background = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9,bubble_pop.PlayGame.prototype.bacground);
+                    
+                    //Restart the score
+                    score = 0;
                     
                     //This sets how the game handles collisions, etc.
                     this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -37,10 +30,10 @@
                     fadeWords = this.game.add.group();
 
                     //Holds the three sprites showing how many lives the user has left
-                    lives = []
-                    lives[0] = this.game.add.sprite(10,10,'ship');
-                    lives[1] = this.game.add.sprite(60,10,'ship');
-                    lives[2] = this.game.add.sprite(110,10,'ship');
+                    lives = [];
+                    lives[0] = this.game.add.sprite(10,10,bubble_pop.PlayGame.prototype.ship);
+                    lives[1] = this.game.add.sprite(60,10,bubble_pop.PlayGame.prototype.ship);
+                    lives[2] = this.game.add.sprite(110,10,bubble_pop.PlayGame.prototype.ship);
                     currLives = 2;
 
                     //Holds ranges of asteroid speeds for the different dificulty levels. Default difficulty is 0
@@ -82,19 +75,26 @@
                     this.game.time.events.repeat(Phaser.Timer.SECOND * 10, 10,this.newAsteroid, cThis);
                   
 
-                    //Player
-                    if(y == 1){
-		  eSprite = this.game.add.sprite(100,100,'ship');
-        }
-        else if(y == 2){
-             eSprite = this.game.add.sprite(100,100,'ship1');
-        }
+                    /**player**/
+                    
+                    //Choose player sprite
+//                    if(y == 1)
+                    {
+                        eSprite = this.game.add.sprite(this.game.width/2,this.game.height/2,bubble_pop.PlayGame.prototype.ship);
+                    }
+//                    else if(y == 2)
+//                    {
+//                        eSprite = this.game.add.sprite(100,100,ship);
+//                    }
+                    
+                    //Set player properties
                     this.game.physics.arcade.enable(eSprite);
                     eSprite.body.gravity.y = 0;
                     eSprite.body.gravity.x = 0;
                     eSprite.body.collideWorldBounds = true;
                     eSprite.anchor.setTo(0.5, 0.5);
-
+                    /**End player**/
+                    
                     //This allows for arrow key input    
                     cursors = this.game.input.keyboard.createCursorKeys();
 
@@ -138,7 +138,6 @@
                     quitButton.anchor.x =.52;
                     quitButton.anchor.y = .5;
                     
-                 
                     aniTest.animations.frame = (difficulty);//display the current difficulty level
                     
                 }
@@ -293,10 +292,10 @@
                     
                     if(y == 1){
 		var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet');
-        }
-        else if(y == 2){
-        var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet2');
-        }
+                    }
+                    else if(y == 2){
+                    var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet2');
+                    }
                     var laser = this.add.audio('laser');
                     laser.play();
                     newBullet.anchor.setTo(0.5,1);
