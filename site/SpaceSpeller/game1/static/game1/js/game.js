@@ -77,16 +77,8 @@
 
                     /**player**/
                     
-                    //Choose player sprite
-//                    if(y == 1)
-                    {
-                        eSprite = this.game.add.sprite(this.game.width/2,this.game.height/2,bubble_pop.PlayGame.prototype.ship);
-                    }
-//                    else if(y == 2)
-//                    {
-//                        eSprite = this.game.add.sprite(100,100,ship);
-//                    }
-                    
+                    eSprite = this.game.add.sprite(this.game.width/2,this.game.height/2,bubble_pop.PlayGame.prototype.ship);
+
                     //Set player properties
                     this.game.physics.arcade.enable(eSprite);
                     eSprite.body.gravity.y = 0;
@@ -185,19 +177,22 @@
 
                     /*~~~~~~~~~~~~~~~~~Arrow keys~~~~~~~~~~~~~~~~~~~*/
                     if (cursors.left.isDown) {
-                            if(!cursors.up.isDown&&!cursors.down.isDown) {
+                            if(!cursors.up.isDown&&!cursors.down.isDown) 
+                            {
                                     eSprite.angle = -90;
-                }
+                            }
 
                             xGlidePos = 0;
                             //  Move to the left
                             eSprite.body.velocity.x = -70-xGlideNeg;
                             xGlideNeg+=20;  
                     }
-                    else if (cursors.right.isDown) {
-                            if(!cursors.up.isDown&&!cursors.down.isDown) {
+                    else if (cursors.right.isDown) 
+                    {
+                            if(!cursors.up.isDown&&!cursors.down.isDown) 
+                            {
                                     eSprite.angle = 90;
-                }
+                            }
                             xGlideNeg = 0;
                             //  Move to the right
                             eSprite.body.velocity.x = 70+xGlidePos;
@@ -219,7 +214,8 @@
                             yGlideNeg+=20;
                     }
                     else if(cursors.down.isDown) {
-                            if(!cursors.left.isDown&&!cursors.right.isDown) {
+                            if(!cursors.left.isDown&&!cursors.right.isDown) 
+                            {
                                     eSprite.angle = 180;
                             }
 
@@ -227,22 +223,27 @@
                             eSprite.body.velocity.y=70+yGlidePos;
                             yGlidePos+=20;
                     }
-                    else {
+                    else 
+                    {
                             eSprite.body.velocity.y = 0;        
                             yGlidePos = 0;
                             yGlideNeg = 0; 
                     }
 
-            if(cursors.up.isDown&&cursors.right.isDown) {
+                    if(cursors.up.isDown&&cursors.right.isDown) 
+                    {
                             eSprite.angle = 45;
                     }
-            else if(cursors.right.isDown&&cursors.down.isDown) {
+                    else if(cursors.right.isDown&&cursors.down.isDown) 
+                    {
                             eSprite.angle = 135;
                     }
-            else if(cursors.down.isDown&&cursors.left.isDown){
+                    else if(cursors.down.isDown&&cursors.left.isDown)
+                    {
                             eSprite.angle = -135;
                     }
-                    else if(cursors.left.isDown&&cursors.up.isDown) {
+                    else if(cursors.left.isDown&&cursors.up.isDown) 
+                    {
                             eSprite.angle = -45;
                     }
                     /*~~~~~~~~~~~~~~~~~Arrow keys~~~~~~~~~~~~~~~~~~~*/
@@ -291,10 +292,10 @@
                     //create a new bullet in the bullets group and place it at the ships position
                     
                     if(y == 1){
-		var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet');
+                        var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet');
                     }
                     else if(y == 2){
-                    var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet2');
+                        var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet2');
                     }
                     var laser = this.add.audio('laser');
                     laser.play();

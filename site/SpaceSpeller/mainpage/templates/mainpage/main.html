@@ -59,7 +59,19 @@
 						},
 						success: function(response) {
 							// data.redirect contains the string URL to redirect to
-							window.location.href = response;
+                                                        if(response==="/accounts/invalid")
+                                                        {
+                                                            swal
+                                                            ({
+                                                                title: "Invalid Login!",
+                                                                text: "Either the username or password you provided were incorrect!\nIf you continue to be unable tolog in, contact your teacher"
+                                                            });
+                                                            console.log("invalid");
+                                                        }
+                                                        else
+                                                        {
+                                                            window.location.href = response;
+                                                        }
 						}
 					})
 				}
@@ -88,7 +100,19 @@
 						},
 						success: function(response) {
 							// data.redirect contains the string URL to redirect to
-							window.location.href = response;
+							if(response==="/accounts/invalid")
+                                                        {
+                                                            swal
+                                                            ({
+                                                                title: "Invalid Login!",
+                                                                text: "Either the username or password you provided were incorrect!\nIf you continue to be unable to log in, contact your adminstrator"
+                                                            });
+                                                            console.log("invalid");
+                                                        }
+                                                        else
+                                                        {
+                                                            window.location.href = response;
+                                                        }
 						}
 					})
 				}
