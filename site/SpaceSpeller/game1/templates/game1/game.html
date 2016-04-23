@@ -9,7 +9,9 @@
 	<title>Space Spellers</title>
 	<script type="text/javascript">
 		var STATIC_URL = "{% static 'game1/' %}";
-		var words = {{ value|safe }}
+		var words = {{ value|safe }};
+                var stuName = "{{stuName|safe}}";
+                var stuGrade = "{{stuGrade|safe}}";
 	</script>
 	<script src="{% static 'game1/js/lib/phaser.min.js' %}"></script>
 	<script src="{% static 'game1/js/lib/jquery-1.12.0.min.js' %}"></script>

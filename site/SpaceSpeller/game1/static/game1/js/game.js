@@ -10,6 +10,8 @@
                 
             },
             create: function() {
+
+                    
                     
                     //Choose which background to use
                     background = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9,bubble_pop.PlayGame.prototype.bacground);
@@ -93,6 +95,11 @@
                     //Bind the space bar to the fire function
                     key2 = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
                     key2.onDown.add(this.fire, this);
+
+                    bubble_pop.PlayGame.prototype.studentNameText = this.game.add.text(10,this.game.world.height-34,"Player: "+stuName,{ fontSize: '24px', fill: '#FFF' });
+                    bubble_pop.PlayGame.prototype.studentGradeText = this.game.add.text(this.game.world.width-10,this.game.world.height-34,"Grade: "+stuGrade,{ fontSize: '24px', fill: '#FFF',align:"right" });
+                    bubble_pop.PlayGame.prototype.studentGradeText.anchor.x = 1;
+                    
 
                     score_text = this.game.add.text(this.game.world.width/2, 5, 'Score: 0', { fontSize: '24px', fill: '#FFF' });
                     score_text.anchor.x = .5;
@@ -290,22 +297,24 @@
             },
            fire: function() { //Create and fire a bullet
                     //create a new bullet in the bullets group and place it at the ships position
-                    
-                    if(y == 1){
-                        var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet');
-                    }
-                    else if(y == 2){
-                        var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet2');
-                    }
-                    var laser = this.add.audio('laser');
-                    laser.play();
-                    newBullet.anchor.setTo(0.5,1);
-                    newBullet.events.onOutOfBounds.add(this.resetBullet, this);
+                    if(this.game.paused !== true)
+                    {
+                        if(y == 1){
+                            var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet');
+                        }
+                        else if(y == 2){
+                            var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet2');
+                        }
+                        var laser = this.add.audio('laser');
+                        laser.play();
+                        newBullet.anchor.setTo(0.5,1);
+                        newBullet.events.onOutOfBounds.add(this.resetBullet, this);
 
-                    newBullet.angle = eSprite.angle;
+                        newBullet.angle = eSprite.angle;
 
-                    //Make the bullet move in the direction the ship is facing with a speed of 1000
-                    this.game.physics.arcade.velocityFromAngle(eSprite.angle-90, 1000, newBullet.body.velocity);
+                        //Make the bullet move in the direction the ship is facing with a speed of 1000
+                        this.game.physics.arcade.velocityFromAngle(eSprite.angle-90, 1000, newBullet.body.velocity);
+                    }
             },
             moveAsteroid: function() { //This function moves all of the members of the asteroids group
                 console.log("Difficulty is now: "+difficulty);

@@ -11,7 +11,7 @@ def game(request):
     print(l.grade)
     print(l.grade == 1)
     rand_words = generateRandomWords(l.grade)
-    return render(request, 'game1/game.html', {'value':rand_words})
+    return render(request, 'game1/game.html', {'value':rand_words,'stuName':l.firstname,'stuGrade':l.grade})
 
 def updateScore(request):
     if request.method == "POST":
