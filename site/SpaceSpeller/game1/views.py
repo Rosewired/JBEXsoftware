@@ -1,17 +1,20 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.db.models import Max
 from RandomWordGenerator import *
 import models
 
 @login_required
 def game(request):
     user = request.user.username
+    
     l = models.StudentInfo.objects.get(username=user)
     print(l.grade)
-    print(l.grade == 1)
+    print(l.grade == 1)   
     rand_words = generateRandomWords(l.grade)
-    return render(request, 'game1/game.html', {'value':rand_words,'stuName':l.firstname,'stuGrade':l.grade})
+    return render(request, 'game1/game.html', {'value':rand_words,'stuName':l.firstname,'stuGrade':l.grade,
+'highScore':models.ScoreInfo.objects.filter(student_id=l.idstudent).aggregate(Max('score'))['score__max']})
 
 def updateScore(request):
     if request.method == "POST":

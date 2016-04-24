@@ -96,7 +96,7 @@
                     key2 = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
                     key2.onDown.add(this.fire, this);
 
-                    bubble_pop.PlayGame.prototype.studentNameText = this.game.add.text(10,this.game.world.height-34,"Player: "+stuName,{ fontSize: '24px', fill: '#FFF' });
+                    bubble_pop.PlayGame.prototype.studentNameText = this.game.add.text(10,this.game.world.height-34,"Player: "+stuName+"    Highscore: "+highScore,{ fontSize: '24px', fill: '#FFF' });
                     bubble_pop.PlayGame.prototype.studentGradeText = this.game.add.text(this.game.world.width-10,this.game.world.height-34,"Grade: "+stuGrade,{ fontSize: '24px', fill: '#FFF',align:"right" });
                     bubble_pop.PlayGame.prototype.studentGradeText.anchor.x = 1;
                     
