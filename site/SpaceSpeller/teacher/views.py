@@ -47,6 +47,127 @@ def addStudent(request):
         
     return HttpResponse('')
 
+"""
+Add a word
+"""
+def addWord(request):
+
+	if request.method == "POST":
+		print "TEST"
+
+		grade = request.POST['grade']
+		newWord = request.POST['word']
+		print grade
+                if(not game1.RandomWordGenerator.correct(newWord)):
+                    return HttpResponse('inc')
+                    
+		if(grade == "1"):
+                    if(game1.models.Words1.objects.filter(word=newWord).exists()):
+                        return HttpResponse('dup')
+
+                    count = game1.models.Words1.objects.count()+1
+                    print count
+                    new_record = game1.models.Words1(word=newWord,id=count)
+		
+                    new_record.save()
+
+			
+		elif(grade == "2"):
+                        if(game1.models.Words2.objects.filter(word=newWord).exists()):
+                            return HttpResponse('dup')
+			print 2
+			new_record = game1.models.Words2(word=newWord,id=game1.models.Words2.objects.count()+1)
+        		new_record.save()
+
+		
+		elif(grade == "3"):
+                        if(game1.models.Words3.objects.filter(word=newWord).exists()):
+                            return HttpResponse('dup')
+			print 3
+			new_record = game1.models.Words3(word=newWord,id=game1.models.Words3.objects.count()+1)
+        		new_record.save()
+
+
+
+		elif(grade == "4"):
+                        if(game1.models.Words4.objects.filter(word=newWord).exists()):
+                            return HttpResponse('dup')
+			print 4
+			new_record = game1.models.Words4(word=newWord,id=game1.models.Words4.objects.count()+1)
+        		new_record.save()
+
+
+		elif(grade == "5"):
+                        if(game1.models.Words5.objects.filter(word=newWord).exists()):
+                            return HttpResponse('dup')
+			print "got 5"
+			new_record = game1.models.Words5(word=newWord,id=game1.models.Words5.objects.count()+1)
+        		new_record.save()
+
+	
+		else:
+			print "failed"
+			return HttpResponse('nsg')
+			
+	return HttpResponse('sucess')
+
+"""
+Add a word
+"""
+def removeWord(request):
+
+	if request.method == "POST":
+		print "TEST"
+
+		grade = request.POST['grade']
+		newWord = request.POST['word']
+		print grade
+                if(not game1.RandomWordGenerator.correct(newWord)):
+                    return HttpResponse('inc')
+                    
+		if(grade == "1"):
+                    if(not game1.models.Words1.objects.filter(word=newWord).exists()):
+                        return HttpResponse('dup')
+
+                    
+                    game1.models.Words1.objects.get(word=newWord).delete()
+
+			
+		elif(grade == "2"):
+                        if(not game1.models.Words2.objects.filter(word=newWord).exists()):
+                            return HttpResponse('dup')
+			print 2
+			game1.models.Words2.objects.get(word=newWord).delete()
+
+		
+		elif(grade == "3"):
+                        if(not game1.models.Words3.objects.filter(word=newWord).exists()):
+                            return HttpResponse('dup')
+			print 3
+			game1.models.Words3.objects.get(word=newWord).delete()
+
+
+
+		elif(grade == "4"):
+                        if(not game1.models.Words4.objects.filter(word=newWord).exists()):
+                            return HttpResponse('dup')
+			print 4
+			game1.models.Words4.objects.get(word=newWord).delete()
+
+
+		elif(grade == "5"):
+                        if(not game1.models.Words5.objects.filter(word=newWord).exists()):
+                            return HttpResponse('dup')
+			print "got 5"
+			game1.models.Words5.objects.get(word=newWord).delete()
+
+	
+		else:
+			print "failed"
+			return HttpResponse('nsg')
+			
+	return HttpResponse('sucess')
+
 
 """
 Delete a chosen student

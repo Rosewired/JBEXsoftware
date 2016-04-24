@@ -278,6 +278,129 @@
 		});
 		
 	</script>
+    <script>
+        function addWord() {
+		swal.withForm({
+      			title: "Add Word", 
+      			text: "Enter Word to Add",
+      			showCancelButton: true,
+     			closeOnConfirm: true,
+				formFields: [
+					{ id: 'grade', placeholder: 'Grade (1-5)' },
+					{ id: 'word', placeholder: 'Word' }
+				]
+    		}, function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+						type: "post",
+						url: "/teacher/addwrd/",
+						data: {
+							csrfmiddlewaretoken: '{{ csrf_token }}', 
+							grade: document.getElementById('grade').value, 
+							word: document.getElementById('word').value, 
+						},
+						success: function(response) {
+							console.log(response);
+                                                        if(response === "dup")
+                                                        {
+                                                             swal
+                                                            ({
+                                                                title: "Duplicate Word!",
+                                                                text: "That word is already in the list!"
+                                                            });
+                                                        }
+                                                        if(response === "inc"){
+                                                             swal
+                                                            ({
+                                                                title: "Misspelled Word",
+                                                                text: "That word is misspelled!"
+                                                            });
+                                                        }
+                                                        if(response === "nsg"){
+                                                             swal
+                                                            ({
+                                                                title: "Grade Invalid",
+                                                                text: "The grade you entered is not between 1 and 5!"
+                                                            });
+                                                        }
+						}
+					})
+				}
+			}
+		);
+		
+		// Auto-capitalize student's first and last name fields
+		$('#firstname, #lastname').keyup(function(event){
+			var textBox = event.target;
+            var start = textBox.selectionStart;
+            var end = textBox.selectionEnd;
+            textBox.value = textBox.value.charAt(0).toUpperCase() + textBox.value.slice(1);
+            textBox.setSelectionRange(start, end);
+		});
+	}
+    </script>
+    <script>
+        function rmvWord() {
+		swal.withForm({
+      			title: "Remove Word", 
+      			text: "Enter Word to Remove",
+      			showCancelButton: true,
+     			closeOnConfirm: true,
+				formFields: [
+					{ id: 'grade', placeholder: 'Grade (1-5)' },
+					{ id: 'word', placeholder: 'Word' }
+				]
+    		}, function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+						type: "post",
+						url: "/teacher/rmvwrd/",
+						data: {
+							csrfmiddlewaretoken: '{{ csrf_token }}', 
+							grade: document.getElementById('grade').value, 
+							word: document.getElementById('word').value, 
+						},
+						success: function(response) {
+							console.log(response);
+                                                        if(response === "dup")
+                                                        {
+                                                             swal
+                                                            ({
+                                                                title: "Duplicate Word!",
+                                                                text: "That word is not in the list!"
+                                                            });
+                                                        }
+                                                        if(response === "inc"){
+                                                             swal
+                                                            ({
+                                                                title: "Misspelled Word",
+                                                                text: "That word is misspelled!"
+                                                            });
+                                                        }
+                                                        if(response === "nsg"){
+                                                             swal
+                                                            ({
+                                                                title: "Grade Invalid",
+                                                                text: "The grade you entered is not between 1 and 5!"
+                                                            });
+                                                        }
+						}
+					})
+				}
+			}
+		);
+		
+		// Auto-capitalize student's first and last name fields
+		$('#firstname, #lastname').keyup(function(event){
+			var textBox = event.target;
+            var start = textBox.selectionStart;
+            var end = textBox.selectionEnd;
+            textBox.value = textBox.value.charAt(0).toUpperCase() + textBox.value.slice(1);
+            textBox.setSelectionRange(start, end);
+		});
+	}
+    </script>
+
 	<center>
 		<button class="button1" onClick="addFunct();">Add Student</button>
 		&nbsp;
@@ -285,6 +408,16 @@
 		&nbsp;
 		&nbsp;
 		<button id="remove_btn" class="button1">Remove Student</button>
+                &nbsp;
+		&nbsp;
+		&nbsp;
+		&nbsp;
+		<button id="add_word_butn" class="button1" onClick="addWord();">Add Word</button>
+                &nbsp;
+		&nbsp;
+		&nbsp;
+		&nbsp;
+		<button id="rmv_word_butn" class="button1" onClick="rmvWord();">Remove Word</button>
 	</center>
 </body>
 </html>

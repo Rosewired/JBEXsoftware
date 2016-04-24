@@ -272,7 +272,10 @@ for i in xrange(0,100000):
 print (time.time()*1000-millis)
 '''
 
-    
+def correct(word):
+	return d.check(word)
+
+
 def generateRandomWords(grade):
     if(grade == 1):
 	    l = list(models.Words1.objects.all().values_list("word",flat=True))

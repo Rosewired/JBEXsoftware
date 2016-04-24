@@ -7,4 +7,7 @@ urlpatterns = [
     url(r'^logout/$', views.teacherLogout),
     url(r'^addstd/$', views.addStudent),
     url(r'^removestd/$', views.removeStudent),
+    url(r'^addwrd/$', views.addWord),
+    url(r'^rmvwrd/$', views.removeWord),
+
 ]
