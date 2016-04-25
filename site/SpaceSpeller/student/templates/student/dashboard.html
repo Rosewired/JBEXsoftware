@@ -259,8 +259,26 @@
  		</div>
  		
  		<div class ="button3">
- 			<button id="logout" class ="classname3" style="top:23px; position:absolute">Log Out</button>
+ 			<button id="logout_btn" class ="classname3" style="top:23px; position:absolute">Log Out</button>
  		</div>
- 	</div> 
+ 	</div>
+
+	<script>
+		// Student logout function
+		$('#logout_btn').click(function() {    
+			$.ajax({
+				type: "post",
+				url: "/student/logout/",
+				data: {
+					csrfmiddlewaretoken: '{{ csrf_token }}',
+					click: false
+				},
+				success: function (response) {        
+					console.log("logged out");
+					window.location.href = response;	
+				}
+			});
+		});
+	</script>
  </body> 
  </html>

@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth import logout
 from datetime import datetime
+from django.http import HttpResponse
 
 import game1.models
 import json
@@ -41,3 +43,13 @@ def studentDashboard(request):
     score_list = getStudentScore(request.user.username)
     
     return render(request, 'student/dashboard.html', {'score': score_list})
+
+"""
+Response to student logout
+"""
+def studentLogout(request):
+    if request.POST.get('click', False):
+        logout(request)
+        return HttpResponse('/main/')
+
+    teacherPage(request)

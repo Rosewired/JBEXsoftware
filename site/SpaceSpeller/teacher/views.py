@@ -128,7 +128,6 @@ def removeWord(request):
 		if(grade == "1"):
                     if(not game1.models.Words1.objects.filter(word=newWord).exists()):
                         return HttpResponse('dup')
-
                     
                     game1.models.Words1.objects.get(word=newWord).delete()
 
@@ -218,7 +217,9 @@ def teacherPage(request):
 
     return render(request, 'teacher/teacher.html', {'ex': data, 'ex2': score_list, 'tfn': json.dumps(request.user.username)})
 
-
+"""
+Response to teacher logout
+"""
 def teacherLogout(request):
     if request.POST.get('click', False):
         logout(request)

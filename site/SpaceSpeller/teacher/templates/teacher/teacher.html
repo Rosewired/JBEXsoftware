@@ -7,7 +7,7 @@
 	<script src="{% static 'teacher/dist/swal-forms.js' %}"></script>
 	<script src="{% static 'teacher/js/jquery-1.12.0.min.js' %}"></script>
 	<script src="{% static 'teacher/js/jquery-ui-1.11.4.min.js' %}"></script>
-		<title>Space Spellers</title>
+	<title>Space Spellers</title>
 	
 	<link href="https://code.jquery.com/ui/1.11.4/themes/black-tie/jquery-ui.css" rel="stylesheet" type="text/css"/>
 	
@@ -192,14 +192,14 @@
 				tr.append("<td>" + objs[i].fields.firstname + "</td>");
 				tr.append("<td>" + objs[i].fields.lastname + "</td>");
 				td = $('<td/>');
-				for (var j = 0; j < scores[user].length; j++) {
+				for (var j = scores[user].length-1; j > scores[user].length-6; j--) {
 					d_date = new Date(scores[user][j][0])
 					td.append(scores[user][j][1] + "<br>");					
 				}
 				tr.append(td);
 				
 				td = $('<td/>');
-				for (var j = 0; j < scores[user].length; j++) {
+				for (var j = scores[user].length-1; j > scores[user].length-6; j--) {
 					d_date = new Date(scores[user][j][0])
 					td.append(d_date + "<br>");					
 				}
@@ -300,29 +300,24 @@
 							word: document.getElementById('word').value, 
 						},
 						success: function(response) {
-							console.log(response);
-                                                        if(response === "dup")
-                                                        {
-                                                             swal
-                                                            ({
-                                                                title: "Duplicate Word!",
-                                                                text: "That word is already in the list!"
-                                                            });
-                                                        }
-                                                        if(response === "inc"){
-                                                             swal
-                                                            ({
-                                                                title: "Misspelled Word",
-                                                                text: "That word is misspelled!"
-                                                            });
-                                                        }
-                                                        if(response === "nsg"){
-                                                             swal
-                                                            ({
-                                                                title: "Grade Invalid",
-                                                                text: "The grade you entered is not between 1 and 5!"
-                                                            });
-                                                        }
+							if(response === "dup") {
+								swal ({
+									title: "Duplicate Word!",
+									text: "That word is already in the list!"
+								});
+							}
+							if(response === "inc") {
+								swal ({
+									title: "Misspelled Word",
+									text: "That word is misspelled!"
+								});
+							}
+							if(response === "nsg") {
+								swal ({
+									title: "Grade Invalid",
+									text: "The grade you entered is not between 1 and 5!"
+								});
+							}
 						}
 					})
 				}
@@ -361,29 +356,24 @@
 							word: document.getElementById('word').value, 
 						},
 						success: function(response) {
-							console.log(response);
-                                                        if(response === "dup")
-                                                        {
-                                                             swal
-                                                            ({
-                                                                title: "Duplicate Word!",
-                                                                text: "That word is not in the list!"
-                                                            });
-                                                        }
-                                                        if(response === "inc"){
-                                                             swal
-                                                            ({
-                                                                title: "Misspelled Word",
-                                                                text: "That word is misspelled!"
-                                                            });
-                                                        }
-                                                        if(response === "nsg"){
-                                                             swal
-                                                            ({
-                                                                title: "Grade Invalid",
-                                                                text: "The grade you entered is not between 1 and 5!"
-                                                            });
-                                                        }
+							if(response === "dup") {
+								swal ({
+									title: "Duplicate Word!",
+									text: "That word is not in the list!"
+								});
+							}
+							if(response === "inc") {
+								swal ({
+									title: "Misspelled Word",
+									text: "That word is misspelled!"
+								});
+							}
+							if(response === "nsg"){
+								swal ({
+									title: "Grade Invalid",
+									text: "The grade you entered is not between 1 and 5!"
+								});
+							}
 						}
 					})
 				}
@@ -408,12 +398,12 @@
 		&nbsp;
 		&nbsp;
 		<button id="remove_btn" class="button1">Remove Student</button>
-                &nbsp;
+		&nbsp;
 		&nbsp;
 		&nbsp;
 		&nbsp;
 		<button id="add_word_butn" class="button1" onClick="addWord();">Add Word</button>
-                &nbsp;
+		&nbsp;
 		&nbsp;
 		&nbsp;
 		&nbsp;
