@@ -9,7 +9,8 @@ var style = { font: "28px Arial", fill: "#ffffff", align: "center"};
 var selectionArrow;
 bubble_pop.MainMenu.prototype = {
 	create: function() {
- 
+        
+        y=1;
         bubble_pop.MainMenu.prototype.sendShip = 'ship';
         bubble_pop.MainMenu.prototype.sendBackground = 'map';
         background = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9, "starField");
