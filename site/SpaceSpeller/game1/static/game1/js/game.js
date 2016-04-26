@@ -36,6 +36,16 @@
                     lives[0] = this.game.add.sprite(10,10,bubble_pop.PlayGame.prototype.ship);
                     lives[1] = this.game.add.sprite(60,10,bubble_pop.PlayGame.prototype.ship);
                     lives[2] = this.game.add.sprite(110,10,bubble_pop.PlayGame.prototype.ship);
+                    
+                    lives[0].scale.x = .5;
+                    lives[0].scale.y = .5;
+                    
+                    lives[1].scale.x = .5;
+                    lives[1].scale.y = .5;
+                    
+                    lives[2].scale.x = .5;
+                    lives[2].scale.y = .5;
+                    
                     currLives = 2;
 
                     //Holds ranges of asteroid speeds for the different dificulty levels. Default difficulty is 0
@@ -87,6 +97,8 @@
                     eSprite.body.gravity.x = 0;
                     eSprite.body.collideWorldBounds = true;
                     eSprite.anchor.setTo(0.5, 0.5);
+                    eSprite.scale.x = .5;
+                    eSprite.scale.y = .5;
                     /**End player**/
                     
                     //This allows for arrow key input    
@@ -377,12 +389,12 @@
             newAsteroid: function()
             {
                
- if(x == 3){
-			var ast = asteroids.create(10, this.game.world.randomY, 'asteroid1');
-            }
-            else{
+// if(x == 3){
+//			var ast = asteroids.create(10, this.game.world.randomY, 'asteroid1');
+//            }
+//            else{
              var ast = asteroids.create(10, this.game.world.randomY, 'asteroid');  
-            }
+//            }
                     ast.anchor.x =.5;
                     ast.anchor.y =.5;
                    
