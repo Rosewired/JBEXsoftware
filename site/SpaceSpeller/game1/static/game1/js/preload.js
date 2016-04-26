@@ -55,8 +55,6 @@ bubble_pop.Preload.prototype = {
                 this.load.audio('game3',STATIC_URL+'music/game3.mp3');
                 this.load.audio('game4',STATIC_URL+'music/game4.mp3');
                 this.load.audio('game5',STATIC_URL+'music/game5.mp3');
-                this.load.audio('game6',STATIC_URL+'music/game6.mp3');
-                this.load.audio('game7',STATIC_URL+'music/game7.mp3');
                 /**Sound files**/
                 
                 
@@ -84,16 +82,8 @@ bubble_pop.Preload.prototype = {
                     var game4 = this.add.audio('game4');
                     game4.loopFull();
                 }
-                else if(x>=4 && x<5){
-                    var game5 = this.add.audio('game5');
-                    game5.loopFull();
-                }
-                else if(x>=5 && x<6){
-                    var game5 = this.add.audio('game6');
-                    game5.loopFull();
-                }
                 else{
-                    var game5 = this.add.audio('game7');
+                    var game5 = this.add.audio('game5');
                     game5.loopFull();
                 }
                 
