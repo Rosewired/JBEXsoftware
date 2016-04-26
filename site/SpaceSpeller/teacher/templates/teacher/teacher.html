@@ -185,27 +185,37 @@
 			var d_date; 
 			var tr;
 			var td;
+			var limit;
 			
 			for (var i = 0; i < objs.length; i++) {
 				tr = $('<tr/>');
 				user = objs[i].fields.username;
+				
+				if (scores[user].length >= 5) { // Student has more than 5 scores
+					limit = scores[user].length-5;
+				}
+				else {
+					limit = 0;
+				}
+				
+				console.log(user);
 				tr.append("<td>" + objs[i].fields.firstname + "</td>");
 				tr.append("<td>" + objs[i].fields.lastname + "</td>");
 				td = $('<td/>');
-				for (var j = scores[user].length-1; j > scores[user].length-6; j--) {
-					d_date = new Date(scores[user][j][0])
+				for (var j = scores[user].length-1; j >= limit; j--) {
+					console.log(scores[user][j]);
+					d_date = new Date(scores[user][j][0]);
 					td.append(scores[user][j][1] + "<br>");					
 				}
 				tr.append(td);
 				
 				td = $('<td/>');
-				for (var j = scores[user].length-1; j > scores[user].length-6; j--) {
+				for (var j = scores[user].length-1; j >= limit; j--) {
 					d_date = new Date(scores[user][j][0])
 					td.append(d_date + "<br>");					
 				}
 				tr.append(td);
-				
-                                tr.append("<td>" + objs[i].fields.grade + "</td>");
+				tr.append("<td>" + objs[i].fields.grade + "</td>");
                                 
 				$('table').append(tr);
 			}
