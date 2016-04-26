@@ -6,7 +6,7 @@
 <head> 
 	<background
 	<meta charset="UTF-8" />
-	<title>Space Spellers</title>
+	<title>Space Spellers - Game</title>
 	<script type="text/javascript">
 		var STATIC_URL = "{% static 'game1/' %}";
 		var words = {{ value|safe }};
@@ -25,9 +25,7 @@
 	<script src="{% static 'game1/js/over.js' %}"></script>
 </head>
 <body bgcolor = "000000">
-
 	<script type="text/javascript" src="{% static 'game1/js/main.js' %}"></script>
-
 </body>
 </html>
 {% endblock %}
