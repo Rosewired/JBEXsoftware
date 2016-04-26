@@ -9,6 +9,7 @@ bubble_pop.Preload.prototype = {
 		
                 /**Images**/
 		this.load.image('ship',STATIC_URL+'images/ship.png');
+				this.load.image('ship',STATIC_URL+'images/ship.png');
                 this.load.image('ship1',STATIC_URL+'images/ship1.png');
                 this.load.image('ship2',STATIC_URL+'images/ship2.png');
                 this.load.image('ship3',STATIC_URL+'images/ship3.png');
@@ -20,9 +21,13 @@ bubble_pop.Preload.prototype = {
                 this.load.image('shipButton3',STATIC_URL+'images/ship3.png');
                 this.load.image('shipButton4',STATIC_URL+'images/ship4.png');
                 this.load.image('shipButton5',STATIC_URL+'images/ship5.png');
-		this.load.image('bullet',STATIC_URL+'images/bullet.png');
-                this.load.image('bullet2',STATIC_URL+'images/bullet2.png');
-		this.load.image('asteroid',STATIC_URL+'images/asteroid.png');
+				this.load.image('bullet',STATIC_URL+'images/bullet.png');
+                this.load.image('bullet1',STATIC_URL+'images/bullet1.png');
+				this.load.image('bullet2',STATIC_URL+'images/bullet2.png');
+                this.load.image('bullet3',STATIC_URL+'images/bullet3.png');
+				this.load.image('bullet4',STATIC_URL+'images/bullet4.png');
+                this.load.image('bullet5',STATIC_URL+'images/bullet5.png');
+				this.load.image('asteroid',STATIC_URL+'images/asteroid.png');
                 this.load.image('asteroid1',STATIC_URL+'images/asteroid1.png');
                 this.load.image('map',STATIC_URL+'images/map.jpg');
                 this.load.image('map2',STATIC_URL+'images/map2.jpg');

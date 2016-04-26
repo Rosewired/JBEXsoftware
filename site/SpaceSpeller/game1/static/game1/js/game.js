@@ -10,9 +10,6 @@
                 
             },
             create: function() {
-
-                    
-                    
                     //Choose which background to use
                     background = this.add.tileSprite(0, 0, $(document).width()*.9, $(document).height()*.9,bubble_pop.PlayGame.prototype.bacground);
                     
@@ -315,7 +312,19 @@
                             var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet');
                         }
                         else if(y == 2){
+                            var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet1');
+                        }
+						else if(y == 3){
                             var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet2');
+                        }
+						else if(y == 4){
+                            var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet3');
+                        }
+						else if(y == 5){
+                            var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet4');
+                        }
+						else if(y == 6){
+                            var newBullet = bullets.create(eSprite.x, eSprite.y, 'bullet5');
                         }
                         var laser = this.add.audio('laser');
                         laser.play();
