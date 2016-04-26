@@ -49,6 +49,8 @@ def isVowel(vowel):
 def scrambleSingleVowel(word):
     global vList
     
+    if(len(vList)==0):
+        return -1;
 #     print "scramble"
     pos = random.randrange(len(vList))
     index = vList[pos][0]
@@ -79,6 +81,8 @@ def scrambleSingleVowel(word):
 def scrambleDoubleVowel(word):
     global doubleVList
     
+    if(len(doubleVList) == 0):
+        return -1;
 #     print "double vowel scramble"
     pos = random.randrange(len(doubleVList))
     index = doubleVList[pos][0]
