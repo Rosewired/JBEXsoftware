@@ -68,34 +68,34 @@ bubble_pop.Preload.prototype = {
                 
                 //Choose random song to play
                 var x = Math.random()*3;
-//                if(x<1){
-//                    var game1 = this.add.audio('game1');
-//                    game1.loopFull();
-//                }
-//                else if(x>=1 && x<2){
-//                    var game2 = this.add.audio('game2');
-//                    game2.loopFull();
-//                }
-//                else if(x>=2 && x <=3){
-//                    var game3 = this.add.audio('game3');
-//                    game3.loopFull();
-//                }
-//                else if(x>=3 && x<4){
-//                    var game4 = this.add.audio('game4');
-//                    game4.loopFull();
-//                }
-//                else if(x>=4 && x<5){
-//                    var game5 = this.add.audio('game5');
-//                    game5.loopFull();
-//                }
-//                else if(x>=5 && x<6){
-//                    var game5 = this.add.audio('game6');
-//                    game5.loopFull();
-//                }
-//                else{
-//                    var game5 = this.add.audio('game7');
-//                    game5.loopFull();
-//                }
+                if(x<1){
+                    var game1 = this.add.audio('game1');
+                    game1.loopFull();
+                }
+                else if(x>=1 && x<2){
+                    var game2 = this.add.audio('game2');
+                    game2.loopFull();
+                }
+                else if(x>=2 && x <=3){
+                    var game3 = this.add.audio('game3');
+                    game3.loopFull();
+                }
+                else if(x>=3 && x<4){
+                    var game4 = this.add.audio('game4');
+                    game4.loopFull();
+                }
+                else if(x>=4 && x<5){
+                    var game5 = this.add.audio('game5');
+                    game5.loopFull();
+                }
+                else if(x>=5 && x<6){
+                    var game5 = this.add.audio('game6');
+                    game5.loopFull();
+                }
+                else{
+                    var game5 = this.add.audio('game7');
+                    game5.loopFull();
+                }
                 
 	}
 }
