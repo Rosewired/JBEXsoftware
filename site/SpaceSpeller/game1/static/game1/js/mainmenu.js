@@ -75,7 +75,7 @@ bubble_pop.MainMenu.prototype = {
         
         
         shipArrow = this.game.add.sprite(ship1.position.x,ship1.position.y,'selectArrow');
-        shipArrow.anchor.setTo(.5,-1);
+        shipArrow.anchor.setTo(.5,-2);
         shipArrow.scale.x = .5;
         shipArrow.scale.y = .5;
         shipArrow.animations.frame = 0;
