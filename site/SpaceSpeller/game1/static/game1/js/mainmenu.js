@@ -41,13 +41,29 @@ bubble_pop.MainMenu.prototype = {
         button3.name = 'map3';
         button3.anchor.setTo(0.5, 0.5);
         
-        ship1 = this.game.add.button(this.game.width/4, this.game.height*5/8, 'shipButton', this.ship, this);
+        ship1 = this.game.add.button(this.game.width*1/7, this.game.height*5/8, 'shipButton', this.ship, this);
         ship1.name = 'ship';
         ship1.anchor.setTo(0.5, 0.5);
         
-        ship2 = this.game.add.button(this.game.width/2, this.game.height*5/8, 'shipButton1', this.ship1, this);
+        ship2 = this.game.add.button(this.game.width*2/7, this.game.height*5/8, 'shipButton1', this.ship1, this);
         ship2.name = 'ship1';
         ship2.anchor.setTo(0.5, 0.5);
+        
+        ship3 = this.game.add.button(this.game.width*3/7, this.game.height*5/8, 'shipButton2', this.ship2, this);
+        ship3.name = 'ship2';
+        ship3.anchor.setTo(0.5, 0.5);
+        
+        ship4 = this.game.add.button(this.game.width*4/7, this.game.height*5/8, 'shipButton3', this.ship3, this);
+        ship4.name = 'ship3';
+        ship4.anchor.setTo(0.5, 0.5);
+        
+        ship5 = this.game.add.button(this.game.width*5/7, this.game.height*5/8, 'shipButton4', this.ship4, this);
+        ship5.name = 'ship4';
+        ship5.anchor.setTo(0.5, 0.5);
+        
+        ship6 = this.game.add.button(this.game.width*6/7, this.game.height*5/8, 'shipButton5', this.ship5, this);
+        ship6.name = 'ship5';
+        ship6.anchor.setTo(0.5, 0.5);
         
         selectionArrow = this.game.add.sprite(button1.position.x,button1.position.y,'selectArrow');
         selectionArrow.anchor.setTo(.5,.5);
@@ -85,13 +101,14 @@ bubble_pop.MainMenu.prototype = {
       selectionArrow.position.x=button1.position.x;
       selectionArrow.position.y=button1.position.y;
       textMap.text =  "Choose your map: Earthscape";
+      x = 1;
     },
     map2: function(){
       bubble_pop.MainMenu.prototype.sendBackground = 'map2';
       selectionArrow.position.x=button2.position.x;
       selectionArrow.position.y=button2.position.y;
       textMap.text =  "Choose your map: Nebula";
-     
+      x = 2;
      
     },
     map3: function(){
@@ -99,7 +116,7 @@ bubble_pop.MainMenu.prototype = {
       selectionArrow.position.x=button3.position.x;
       selectionArrow.position.y=button3.position.y;
       textMap.text =  "Choose your map: Jerry's Map";
-     
+      x = 3;
     },
     ship: function(){
       y = 1; 
@@ -114,7 +131,39 @@ bubble_pop.MainMenu.prototype = {
       shipArrow.position.x=ship2.position.x;
       shipArrow.position.y=ship2.position.y;
       bubble_pop.MainMenu.prototype.sendShip = 'ship1';
-      textShip.text =  "Choose your ship: Grey Ship";
+      textShip.text =  "Choose your ship: Red Ship";
+      
+    },
+    ship2: function(){
+      y = 3;
+      shipArrow.position.x=ship3.position.x;
+      shipArrow.position.y=ship3.position.y;
+      bubble_pop.MainMenu.prototype.sendShip = 'ship2';
+      textShip.text =  "Choose your ship: Green Ship";
+      
+    },
+    ship3: function(){
+      y = 4;
+      shipArrow.position.x=ship4.position.x;
+      shipArrow.position.y=ship4.position.y;
+      bubble_pop.MainMenu.prototype.sendShip = 'ship3';
+      textShip.text =  "Choose your ship: Orange Ship";
+      
+    },
+    ship4: function(){
+      y = 5;
+      shipArrow.position.x=ship5.position.x;
+      shipArrow.position.y=ship5.position.y;
+      bubble_pop.MainMenu.prototype.sendShip = 'ship4';
+      textShip.text =  "Choose your ship: Purple Ship";
+      
+    },
+    ship5: function(){
+      y = 6;
+      shipArrow.position.x=ship6.position.x;
+      shipArrow.position.y=ship6.position.y;
+      bubble_pop.MainMenu.prototype.sendShip = 'ship5';
+      textShip.text =  "Choose your ship: Yellow Ship";
       
     }
 };
