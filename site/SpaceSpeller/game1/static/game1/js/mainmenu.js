@@ -42,27 +42,27 @@ bubble_pop.MainMenu.prototype = {
         button3.name = 'map3';
         button3.anchor.setTo(0.5, 0.5);
         
-        ship1 = this.game.add.button(this.game.width*1/7, this.game.height*5/8, 'shipButton', this.ship, this);
+        ship1 = this.game.add.button(this.game.width*1/7, this.game.height*5/8, 'ship', this.ship, this);
         ship1.name = 'ship';
         ship1.anchor.setTo(0.5, 0.5);
         
-        ship2 = this.game.add.button(this.game.width*2/7, this.game.height*5/8, 'shipButton1', this.ship1, this);
+        ship2 = this.game.add.button(this.game.width*2/7, this.game.height*5/8, 'ship1', this.ship1, this);
         ship2.name = 'ship1';
         ship2.anchor.setTo(0.5, 0.5);
         
-        ship3 = this.game.add.button(this.game.width*3/7, this.game.height*5/8, 'shipButton2', this.ship2, this);
+        ship3 = this.game.add.button(this.game.width*3/7, this.game.height*5/8, 'ship2', this.ship2, this);
         ship3.name = 'ship2';
         ship3.anchor.setTo(0.5, 0.5);
         
-        ship4 = this.game.add.button(this.game.width*4/7, this.game.height*5/8, 'shipButton3', this.ship3, this);
+        ship4 = this.game.add.button(this.game.width*4/7, this.game.height*5/8, 'ship3', this.ship3, this);
         ship4.name = 'ship3';
         ship4.anchor.setTo(0.5, 0.5);
         
-        ship5 = this.game.add.button(this.game.width*5/7, this.game.height*5/8, 'shipButton4', this.ship4, this);
+        ship5 = this.game.add.button(this.game.width*5/7, this.game.height*5/8, 'ship4', this.ship4, this);
         ship5.name = 'ship4';
         ship5.anchor.setTo(0.5, 0.5);
         
-        ship6 = this.game.add.button(this.game.width*6/7, this.game.height*5/8, 'shipButton5', this.ship5, this);
+        ship6 = this.game.add.button(this.game.width*6/7, this.game.height*5/8, 'ship5', this.ship5, this);
         ship6.name = 'ship5';
         ship6.anchor.setTo(0.5, 0.5);
         

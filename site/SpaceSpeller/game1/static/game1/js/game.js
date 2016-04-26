@@ -80,7 +80,7 @@
 
                     //Add new asteroids every second until 10 new asteroids have been added. This is to space the asteroids out so they don't clump together
                     var cThis = this;
-                    console.log(cThis);
+                    //console.log(cThis);
                     this.game.time.events.repeat(Phaser.Timer.SECOND * 10, 10,this.newAsteroid, cThis);
                   
 
@@ -338,7 +338,7 @@
                     }
             },
             moveAsteroid: function() { //This function moves all of the members of the asteroids group
-                console.log("Difficulty is now: "+difficulty);
+                //console.log("Difficulty is now: "+difficulty);
                     for(var i = 0; i < asteroids.children.length; i ++) {
                             if(asteroids.children[i].alive === true) { 
                                     //Set direction to a random angle		
@@ -350,7 +350,7 @@
                     }
             },
              changeAsteroidSpeed: function() { //This function moves all of the members of the asteroids group
-                console.log("Difficulty is now: "+difficulty);
+                //console.log("Difficulty is now: "+difficulty);
                     for(var i = 0; i < asteroids.children.length; i ++) {
                             if(asteroids.children[i].alive === true) { 
                                 this.game.physics.arcade.moveToXY(asteroids.children[i], asteroids.children[i].x,asteroids.children[i].y,this.game.rnd.integerInRange(difficultyLevels[difficulty].lower,difficultyLevels[difficulty].upper));
@@ -361,7 +361,7 @@
             {
                 if(ast.alive === true) 
                 { 
-                    console.log(difficulty);
+                    //console.log(difficulty);
                     this.game.physics.arcade.moveToXY(ast, this.game.width, this.game.world.randomY,this.game.rnd.integerInRange(difficultyLevels[difficulty].lower,difficultyLevels[difficulty].upper));
                 }
             },
