@@ -50,7 +50,7 @@ bubble_pop.Preload.prototype = {
                 /**Sound files**/
 //                this.load.audio('game1',STATIC_URL+'music/game1.mp3');
                 this.load.audio('laser',STATIC_URL+'music/laser.mp3');
-                this.load.audio('destory',STATIC_URL+'music/destory.wav');
+                this.load.audio('destory',STATIC_URL+'music/destory.mp3');
 //                this.load.audio('game2',STATIC_URL+'music/game2.mp3');
 //                this.load.audio('game3',STATIC_URL+'music/game3.mp3');
 //                this.load.audio('game4',STATIC_URL+'music/game4.mp3');
