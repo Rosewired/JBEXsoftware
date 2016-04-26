@@ -48,15 +48,15 @@ bubble_pop.Preload.prototype = {
                 /**Images**/
                 
                 /**Sound files**/
-                this.load.audio('game1',STATIC_URL+'music/game1.mp3');
+//                this.load.audio('game1',STATIC_URL+'music/game1.mp3');
                 this.load.audio('laser',STATIC_URL+'music/laser.mp3');
                 this.load.audio('destory',STATIC_URL+'music/destory.wav');
-                this.load.audio('game2',STATIC_URL+'music/game2.mp3');
-                this.load.audio('game3',STATIC_URL+'music/game3.mp3');
-                this.load.audio('game4',STATIC_URL+'music/game4.mp3');
-                this.load.audio('game5',STATIC_URL+'music/game5.mp3');
-                this.load.audio('game6',STATIC_URL+'music/game6.mp3');
-                this.load.audio('game7',STATIC_URL+'music/game7.wav');
+//                this.load.audio('game2',STATIC_URL+'music/game2.mp3');
+//                this.load.audio('game3',STATIC_URL+'music/game3.mp3');
+//                this.load.audio('game4',STATIC_URL+'music/game4.mp3');
+//                this.load.audio('game5',STATIC_URL+'music/game5.mp3');
+//                this.load.audio('game6',STATIC_URL+'music/game6.mp3');
+//                this.load.audio('game7',STATIC_URL+'music/game7.wav');
                 /**Sound files**/
                 
                 
@@ -67,35 +67,35 @@ bubble_pop.Preload.prototype = {
 		this.game.state.start('MainMenu');
                 
                 //Choose random song to play
-                var x = Math.random()*7;
-                if(x<1){
-                    var game1 = this.add.audio('game1');
-                    game1.loopFull();
-                }
-                else if(x>=1 && x<2){
-                    var game2 = this.add.audio('game2');
-                    game2.loopFull();
-                }
-                else if(x>=2 && x <=3){
-                    var game3 = this.add.audio('game3');
-                    game3.loopFull();
-                }
-                else if(x>=3 && x<4){
-                    var game4 = this.add.audio('game4');
-                    game4.loopFull();
-                }
-                else if(x>=4 && x<5){
-                    var game5 = this.add.audio('game5');
-                    game5.loopFull();
-                }
-                else if(x>=5 && x<6){
-                    var game5 = this.add.audio('game6');
-                    game5.loopFull();
-                }
-                else{
-                    var game5 = this.add.audio('game7');
-                    game5.loopFull();
-                }
+                var x = Math.random()*3;
+//                if(x<1){
+//                    var game1 = this.add.audio('game1');
+//                    game1.loopFull();
+//                }
+//                else if(x>=1 && x<2){
+//                    var game2 = this.add.audio('game2');
+//                    game2.loopFull();
+//                }
+//                else if(x>=2 && x <=3){
+//                    var game3 = this.add.audio('game3');
+//                    game3.loopFull();
+//                }
+//                else if(x>=3 && x<4){
+//                    var game4 = this.add.audio('game4');
+//                    game4.loopFull();
+//                }
+//                else if(x>=4 && x<5){
+//                    var game5 = this.add.audio('game5');
+//                    game5.loopFull();
+//                }
+//                else if(x>=5 && x<6){
+//                    var game5 = this.add.audio('game6');
+//                    game5.loopFull();
+//                }
+//                else{
+//                    var game5 = this.add.audio('game7');
+//                    game5.loopFull();
+//                }
                 
 	}
 }
